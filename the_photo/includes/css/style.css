@@ -1,0 +1,175 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 1, sass/_container.scss */
+.site-content {
+  padding-top: 100px;
+}
+
+/* line 1, sass/_header.scss */
+.sidebar-button, .sidebar-close {
+  z-index: 99999;
+  display: inline-block;
+  color: #000;
+  font-size: 36px;
+  line-height: 36px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px 18px;
+  margin: 10px;
+  z-index: 999;
+  position: fixed;
+  transition: all 0.5s;
+  border: none;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  transition-delay: 0.5s;
+  border-radius: 50%;
+}
+/* line 18, sass/_header.scss */
+.sidebar-button:focus, .sidebar-close:focus {
+  border: none;
+  outline: none;
+}
+/* line 22, sass/_header.scss */
+.sidebar-button:hover, .sidebar-close:hover {
+  border: none;
+}
+/* line 25, sass/_header.scss */
+.sidebar-button:active, .sidebar-close:active {
+  border: none;
+}
+/* line 28, sass/_header.scss */
+.sidebar-button.active, .active.sidebar-close {
+  transition-delay: 0s;
+  transition: all 0.2s;
+}
+/* line 33, sass/_header.scss */
+.sidebar-button.active #nav-icon span:nth-child(1), .active.sidebar-close #nav-icon span:nth-child(1) {
+  top: 14px;
+  width: 0%;
+  left: 50%;
+}
+/* line 39, sass/_header.scss */
+.sidebar-button.active #nav-icon span:nth-child(2), .active.sidebar-close #nav-icon span:nth-child(2) {
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+/* line 43, sass/_header.scss */
+.sidebar-button.active #nav-icon span:nth-child(3), .active.sidebar-close #nav-icon span:nth-child(3) {
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+/* line 47, sass/_header.scss */
+.sidebar-button.active #nav-icon span:nth-child(4), .active.sidebar-close #nav-icon span:nth-child(4) {
+  top: 14px;
+  width: 0%;
+  left: 50%;
+}
+/* line 54, sass/_header.scss */
+.sidebar-button #nav-icon, .sidebar-close #nav-icon {
+  width: 35px;
+  height: 30px;
+  position: relative;
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -moz-transition: ease-in-out 0.5s;
+  -o-transition: ease-in-out 0.5s;
+  -webkit-transition: ease-in-out 0.5s;
+  transition: ease-in-out 0.5s;
+  cursor: pointer;
+}
+/* line 62, sass/_header.scss */
+.sidebar-button #nav-icon span, .sidebar-close #nav-icon span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -moz-transition: ease-in-out 0.5s;
+  -o-transition: ease-in-out 0.5s;
+  -webkit-transition: ease-in-out 0.5s;
+  transition: ease-in-out 0.5s;
+}
+/* line 74, sass/_header.scss */
+.sidebar-button #nav-icon span:nth-child(1), .sidebar-close #nav-icon span:nth-child(1) {
+  top: 3px;
+}
+/* line 78, sass/_header.scss */
+.sidebar-button #nav-icon span:nth-child(2), .sidebar-close #nav-icon span:nth-child(2), .sidebar-button #nav-icon span:nth-child(3), .sidebar-close #nav-icon span:nth-child(3) {
+  top: 14px;
+}
+/* line 82, sass/_header.scss */
+.sidebar-button #nav-icon span:nth-child(4), .sidebar-close #nav-icon span:nth-child(4) {
+  top: 25px;
+}
+
+/* line 89, sass/_header.scss */
+.sidebar-close {
+  color: #fff;
+  background-color: transparent;
+  z-index: 899;
+}
+
+/* line 97, sass/_header.scss */
+#sidebar {
+  float: left;
+  left: -400px;
+  position: fixed;
+  width: 400px;
+  height: 100%;
+  background-color: #080808;
+  z-index: 99;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+/* line 107, sass/_header.scss */
+#sidebar.active {
+  left: 0;
+}
+/* line 111, sass/_header.scss */
+#sidebar .sidebar-wrapper {
+  padding: 80px 50px;
+}
+/* line 114, sass/_header.scss */
+#sidebar .sidebar-wrapper .side-logo {
+  padding-bottom: 30px;
+  max-width: 100%;
+}
+/* line 118, sass/_header.scss */
+#sidebar .sidebar-wrapper .side-logo img {
+  width: 100%;
+}
+
+/* line 2, sass/_post.scss */
+.post .slider-wrapper {
+  height: 600px;
+}
+/* line 4, sass/_post.scss */
+.post .slider-wrapper .post-slider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+/* line 9, sass/_post.scss */
+.post .slider-wrapper .post-slider .header-slide {
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+}

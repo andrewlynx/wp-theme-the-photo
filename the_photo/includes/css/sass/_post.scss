@@ -1,0 +1,16 @@
+.post{
+	.slider-wrapper{
+		height: 600px;
+		.post-slider{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			.header-slide {
+				height: 600px;
+				background-size: cover;		
+				background-position: center;	
+			}
+		}
+	}
+}

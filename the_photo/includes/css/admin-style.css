@@ -1,0 +1,13 @@
+#the_photo_add_team_repeat .cmb-type-text {
+	width: 50%;
+	float: left;
+}
+#the_photo_add_team_repeat .cmb-type-text > th {
+	width: 40%;
+}
+#the_photo_add_team_repeat .cmb-type-text > td {
+	width: auto%;
+}
+#the_photo_add_team_repeat .remove-row {
+	padding: 0 10px;
+}
