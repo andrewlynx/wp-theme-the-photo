@@ -49,8 +49,15 @@
 				items: slider_items,
 				dots: false,
 				loop: true,
+				nav: false,
 			});
 		}
+		if ($('.preloader').length > 0) {
+	        $('.preloader').fadeOut('400', function() {
+	            $(this).remove();
+	            $('body').removeClass('loading');
+	        });
+	    }
 	});
 	
 })(jQuery, this);

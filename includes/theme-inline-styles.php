@@ -11,7 +11,8 @@ if(!function_exists('the_photo_set_inline_styles')) {
 		$styles = '';		
 
 		$main_logo = get_option('the_photo_main_logo', $theme_url.'/includes/img/logo.png');
-		if( !empty($main_logo) && !is_front_page() && !is_singular() ) {$styles .= '.site-content { padding-top: 0; }';}
+		$feat_img = get_the_post_thumbnail();
+		if( (!empty($main_logo) || !empty($feat_img) ) && !is_front_page() && is_singular() ) {$styles .= '.site-content { padding-top: 0; }';}
 
 		$main_color = get_option('the_photo_font_color', '#000');
 		if(!empty($main_color)) {$styles .= '.body { color: '. $main_color .'; }';}

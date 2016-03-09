@@ -25,6 +25,19 @@
 	</head>
 	<body <?php body_class(); ?>>
 
+		<!-- preloader -->
+		<div class="preloader">
+			<div class="cs-loader">
+			  <div class="cs-loader-inner">
+			    <label>	●</label>
+			    <label>	●</label>
+			    <label>	●</label>
+			    <label>	●</label>
+			    <label>	●</label>
+			    <label>	●</label>
+			  </div>
+			</div>
+		</div>
 		<!-- wrapper -->
 		<div id="page" class="hfeed site">
 			<button class="sidebar-button">
@@ -55,4 +68,5 @@
 			</div>
 			<!-- /header -->
 			<?php the_photo_get_header_logo(); ?>
+			
 			<div id="content" class="site-content container">

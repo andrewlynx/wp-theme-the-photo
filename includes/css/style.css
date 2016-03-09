@@ -156,20 +156,139 @@
   width: 100%;
 }
 
-/* line 2, sass/_post.scss */
-.post .slider-wrapper {
+/* line 1, sass/_post.scss */
+.slider-wrapper {
   height: 600px;
 }
-/* line 4, sass/_post.scss */
-.post .slider-wrapper .post-slider {
+/* line 3, sass/_post.scss */
+.slider-wrapper .post-slider {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
 }
-/* line 9, sass/_post.scss */
-.post .slider-wrapper .post-slider .header-slide {
+/* line 8, sass/_post.scss */
+.slider-wrapper .post-slider .header-slide {
   height: 600px;
   background-size: cover;
   background-position: center;
+}
+/* line 14, sass/_post.scss */
+.slider-wrapper .featured-image {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+/* line 19, sass/_post.scss */
+.slider-wrapper .featured-image .header-img {
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+}
+/* line 26, sass/_post.scss */
+.slider-wrapper .photo-team {
+  position: absolute;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid;
+}
+
+/* line 1, sass/_preloader.scss */
+.loading #page {
+  opacity: 0;
+}
+
+/* line 4, sass/_preloader.scss */
+.preloader {
+  background: #fff;
+  z-index: 9999999;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+/* line 14, sass/_preloader.scss */
+.preloader .cs-loader-inner {
+  transform: translateY(-50%);
+  top: 50%;
+  position: absolute;
+  width: 100%;
+  color: #428bca;
+  padding: 0 100px;
+  text-align: center;
+}
+/* line 24, sass/_preloader.scss */
+.preloader .cs-loader-inner label {
+  font-size: 20px;
+  opacity: 0;
+  display: inline-block;
+}
+@keyframes lol {
+  0% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  66% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+}
+@-webkit-keyframes lol {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-300px);
+  }
+  33% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+  66% {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(300px);
+  }
+}
+/* line 68, sass/_preloader.scss */
+.preloader .cs-loader-inner label:nth-child(6) {
+  -webkit-animation: lol 3s infinite ease-in-out;
+  animation: lol 3s infinite ease-in-out;
+}
+/* line 73, sass/_preloader.scss */
+.preloader .cs-loader-inner label:nth-child(5) {
+  -webkit-animation: lol 3s 100ms infinite ease-in-out;
+  animation: lol 3s 100ms infinite ease-in-out;
+}
+/* line 78, sass/_preloader.scss */
+.preloader .cs-loader-inner label:nth-child(4) {
+  -webkit-animation: lol 3s 200ms infinite ease-in-out;
+  animation: lol 3s 200ms infinite ease-in-out;
+}
+/* line 83, sass/_preloader.scss */
+.preloader .cs-loader-inner label:nth-child(3) {
+  -webkit-animation: lol 3s 300ms infinite ease-in-out;
+  animation: lol 3s 300ms infinite ease-in-out;
+}
+/* line 88, sass/_preloader.scss */
+.preloader .cs-loader-inner label:nth-child(2) {
+  -webkit-animation: lol 3s 400ms infinite ease-in-out;
+  animation: lol 3s 400ms infinite ease-in-out;
+}
+/* line 93, sass/_preloader.scss */
+.preloader .cs-loader-inner label:nth-child(1) {
+  -webkit-animation: lol 3s 500ms infinite ease-in-out;
+  animation: lol 3s 500ms infinite ease-in-out;
 }

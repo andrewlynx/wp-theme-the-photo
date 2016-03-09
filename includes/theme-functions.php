@@ -38,29 +38,41 @@ if (function_exists('add_theme_support'))
 	Functions
 \*------------------------------------*/
 
+if ( ! function_exists( 'the_photo_body_classes' ) ) :
+function the_photo_body_classes( $classes ) {
+	global $movement_config;
+	$posts_page = get_option( 'page_for_posts' );	
+	
+	$classes[] = 'loading';
+
+	return $classes;
+}
+endif; //movement_body_classes
+
 // The Photo navigation
-function the_photo_nav()
-{
-	wp_nav_menu(
-	array(
-		'theme_location'  => 'header-menu',
-		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
-		'container_id'    => '',
-		'menu_class'      => 'menu',
-		'menu_id'         => '',
-		'echo'            => true,
-		'fallback_cb'     => 'wp_page_menu',
-		'before'          => '',
-		'after'           => '',
-		'link_before'     => '',
-		'link_after'      => '',
-		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
-		'walker'          => ''
-		)
-	);
+if ( ! function_exists( 'the_photo_nav' ) ) {
+	function the_photo_nav(){
+		wp_nav_menu(
+		array(
+			'theme_location'  => 'header-menu',
+			'menu'            => '',
+			'container'       => 'div',
+			'container_class' => 'menu-{menu slug}-container',
+			'container_id'    => '',
+			'menu_class'      => 'menu',
+			'menu_id'         => '',
+			'echo'            => true,
+			'fallback_cb'     => 'wp_page_menu',
+			'before'          => '',
+			'after'           => '',
+			'link_before'     => '',
+			'link_after'      => '',
+			'items_wrap'      => '<ul>%3$s</ul>',
+			'depth'           => 0,
+			'walker'          => ''
+			)
+		);
+	}
 }
 
 function the_photo_admin_scripts()
@@ -393,7 +405,7 @@ if(!function_exists('the_photo_photoset_metadata')){
 		$custom = get_post_meta($id, 'the_photo_add_team');
 	
 		if(!empty($photographer) || !empty($assistant) || !empty($makeup) || !empty($location) || !empty($custom[0])) {
-			$out .= '<div class="photo-team">';
+			$out .= '<div class="photo-team col-md-offset-8 col-md-4">';
 			if(!empty($photographer)) {
 				$out .= '<p><span class="role">'. __('Photographer').': </span>';
 				$out .= '<span class="name">'.$photographer[0].'</span></p>';
@@ -417,7 +429,7 @@ if(!function_exists('the_photo_photoset_metadata')){
 				}
 			}
 			$out .= '</div>';
-			echo $out;
+			return $out;
 		} 
 	}
 }
@@ -460,21 +472,31 @@ if(!function_exists('the_photo_single_feat_img')){
 																			)
 				);  
 				$_out = '';
-				$_out .= '<div class="slider-wrapper">';
-					$_out .= '<div class="post-slider">';
-						foreach($slider[0] as $slide){
-							$_out .= '<div class="header-slide" style="background-image: url(' .$slide. ');"></div>';
-						}
+				$_out .= '<div class="abs">';
+					$_out .= '<div class="slider-wrapper">';
+						$_out .= '<div class="post-slider">';
+							foreach($slider[0] as $slide){
+								$_out .= '<div class="header-slide" style="background-image: url(' .$slide. ');"></div>';
+							}
+						$_out .= '</div>';
+						$_out .= the_photo_photoset_metadata( $id );
 					$_out .= '</div>';
 				$_out .= '</div>';
 				echo $_out;
-			} else { ?>
-				<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
-					<?php the_post_thumbnail(); // Fullsize image for the single post ?>
-				</a>
-			<?php } 
+			} else {
+				$_out = '';
+				$_out .= '<div class="abs">';
+					$_out .= '<div class="slider-wrapper">';
+						$_out .= '<div class="featured-image">';
+							$_out .= '<div class="header-img" style="background-image: url(' .get_the_post_thumbnail_url(). ');"></div>';
+						$_out .= '</div>';
+						$_out .= the_photo_photoset_metadata( $id );
+					$_out .= '</div>';
+				$_out .= '</div>';
+				echo $_out;
+			} 
 			
-		the_photo_photoset_metadata( $id );
+		
 		endif;
 	}
 }
