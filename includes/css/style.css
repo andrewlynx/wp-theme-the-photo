@@ -189,9 +189,18 @@
 /* line 26, sass/_post.scss */
 .slider-wrapper .photo-team {
   position: absolute;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
   border: 1px solid;
+  z-index: 2;
+  right: 0;
+}
+/* line 33, sass/_post.scss */
+.slider-wrapper .photo-team div {
+  width: 100%;
+}
+/* line 37, sass/_post.scss */
+.slider-wrapper .owl-controls {
+  display: none !important;
 }
 
 /* line 1, sass/_preloader.scss */

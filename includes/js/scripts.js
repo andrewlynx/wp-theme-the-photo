@@ -1,5 +1,20 @@
 (function ($, root, undefined) {
 	
+	/*Slider Proportions Function*/
+	var slider_prop = function(){
+		var width = $(window).width(),
+			team_height = $('.photo-team').height();
+			console.log(team_height);
+		if(width > 768) {
+			$('.photo-team').css('top', width / 2 - team_height - 2);
+			$('.header-img, .slider-wrapper, .header-slide').css('height', width / 2);
+		} else {
+			$('.photo-team').css('top', width / 2 - 2);
+			$('.header-img, .header-slide').css('height', width / 2);
+			$('.slider-wrapper').css('height', width / 2 + team_height );
+		}
+	}
+	
 	$(window).load(function () {
 		
 		'use strict';
@@ -52,12 +67,22 @@
 				nav: false,
 			});
 		}
+		
+		/*Preloader*/
 		if ($('.preloader').length > 0) {
 	        $('.preloader').fadeOut('400', function() {
 	            $(this).remove();
 	            $('body').removeClass('loading');
 	        });
 	    }
+		
+		/*Slider Proportions*/
+		slider_prop();
+		
+	});
+	
+	$(window).resize(function () {
+		slider_prop();
 	});
 	
 })(jQuery, this);

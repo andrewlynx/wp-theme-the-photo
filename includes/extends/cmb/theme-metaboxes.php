@@ -26,7 +26,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 	 
 		$meta_boxes['post_slider'] = array(
 		'id'         => 'post_slider',
-		'title'      => __( 'Add slider to the header instead of featured image', 'cmb' ),
+		'title'      => __( 'Add slider to the header instead of featured image. Slider proportions are 2/1 (width/heigth)', 'cmb' ),
 		'pages'      => array( 'post', ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
@@ -37,7 +37,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				'desc'         => __( 'Upload or add multiple images/attachments.', 'cmb' ),
 				'id'           => $prefix . 'slider',
 				'type'         => 'file_list',
-				'preview_size' => array( 150, 100 ), // Default: array( 50, 50 )
+				'preview_size' => array( 200, 100 ), // Default: array( 50, 50 )
 			),
 			array(
 				'name'    => __( 'Number of photos on screen', 'cmb' ),

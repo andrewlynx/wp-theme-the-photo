@@ -405,29 +405,31 @@ if(!function_exists('the_photo_photoset_metadata')){
 		$custom = get_post_meta($id, 'the_photo_add_team');
 	
 		if(!empty($photographer) || !empty($assistant) || !empty($makeup) || !empty($location) || !empty($custom[0])) {
-			$out .= '<div class="photo-team col-md-offset-8 col-md-4">';
-			if(!empty($photographer)) {
-				$out .= '<p><span class="role">'. __('Photographer').': </span>';
-				$out .= '<span class="name">'.$photographer[0].'</span></p>';
-			}
-			if(!empty($assistant)) {
-				$out .= '<p><span class="role">'. __('Assistant').': </span>';
-				$out .= '<span class="name">'.$assistant[0].'</span></p>';
-			}
-			if(!empty($makeup)) {
-				$out .= '<p><span class="role">'. __('Makeup').': </span>';
-				$out .= '<span class="name">'.$makeup[0].'</span></p>';
-			}
-			if(!empty($location)) {
-				$out .= '<p><span class="role">'. __('Location').': </span>';
-				$out .= '<span class="name">'.$location[0].'</span></p>';
-			}
-			if(!empty($custom)) {
-				foreach($custom[0] as $assist) {
-					$out .= '<p><span class="role">'.$assist['role'].': </span>';
-					$out .= '<span class="name">'.$assist['member'].'</span></p>';
+			$out .= '<div class="photo-team col-md-offset-8 col-md-4 col-sm-6 col-xs-12">';
+				$out .= '<div>';
+				if(!empty($photographer)) {
+					$out .= '<p><span class="role">'. __('Photographer').': </span>';
+					$out .= '<span class="name">'.$photographer[0].'</span></p>';
 				}
-			}
+				if(!empty($assistant)) {
+					$out .= '<p><span class="role">'. __('Assistant').': </span>';
+					$out .= '<span class="name">'.$assistant[0].'</span></p>';
+				}
+				if(!empty($makeup)) {
+					$out .= '<p><span class="role">'. __('Makeup').': </span>';
+					$out .= '<span class="name">'.$makeup[0].'</span></p>';
+				}
+				if(!empty($location)) {
+					$out .= '<p><span class="role">'. __('Location').': </span>';
+					$out .= '<span class="name">'.$location[0].'</span></p>';
+				}
+				if(!empty($custom)) {
+					foreach($custom[0] as $assist) {
+						$out .= '<p><span class="role">'.$assist['role'].': </span>';
+						$out .= '<span class="name">'.$assist['member'].'</span></p>';
+					}
+				}
+				$out .= '</div>';
 			$out .= '</div>';
 			return $out;
 		} 
@@ -472,25 +474,21 @@ if(!function_exists('the_photo_single_feat_img')){
 																			)
 				);  
 				$_out = '';
-				$_out .= '<div class="abs">';
-					$_out .= '<div class="slider-wrapper">';
-						$_out .= '<div class="post-slider">';
-							foreach($slider[0] as $slide){
-								$_out .= '<div class="header-slide" style="background-image: url(' .$slide. ');"></div>';
-							}
-						$_out .= '</div>';
-						$_out .= the_photo_photoset_metadata( $id );
+				$_out .= '<div class="slider-wrapper">';
+					$_out .= the_photo_photoset_metadata( $id );
+					$_out .= '<div class="post-slider">';
+						foreach($slider[0] as $slide){
+							$_out .= '<div class="header-slide" style="background-image: url(' .$slide. ');"></div>';
+						}
 					$_out .= '</div>';
 				$_out .= '</div>';
 				echo $_out;
 			} else {
 				$_out = '';
-				$_out .= '<div class="abs">';
-					$_out .= '<div class="slider-wrapper">';
-						$_out .= '<div class="featured-image">';
-							$_out .= '<div class="header-img" style="background-image: url(' .get_the_post_thumbnail_url(). ');"></div>';
-						$_out .= '</div>';
-						$_out .= the_photo_photoset_metadata( $id );
+				$_out .= '<div class="slider-wrapper">';
+					$_out .= the_photo_photoset_metadata( $id );
+					$_out .= '<div class="featured-image">';
+						$_out .= '<div class="header-img" style="background-image: url(' .get_the_post_thumbnail_url(). ');"></div>';
 					$_out .= '</div>';
 				$_out .= '</div>';
 				echo $_out;
