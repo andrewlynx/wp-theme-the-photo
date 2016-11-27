@@ -6,5 +6,9 @@
 	Author: Andrew Melnik
 	Author URI: http://photographer.zp.ua
 	Tags: Photo, HTML5, CSS3
+	
 */
 
+body {
+	font-family: 'Open Sans Light';
+}

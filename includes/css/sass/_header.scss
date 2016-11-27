@@ -1,17 +1,16 @@
 .sidebar-button {
-    z-index: 99999;
+    z-index: 999999;
     display: inline-block;
     color: #000;
     font-size: 36px;
     line-height: 36px;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(255,255,255,0.5);
     padding: 20px 18px;
 	margin: 10px;
-    z-index: 999;
     position: fixed;
     transition: all 0.5s;
     border: none;
-    @include opacity(1);
+    @include opacity(0.3);
     transition-delay: 0.5s;
 	border-radius: 50%;
 
@@ -64,7 +63,7 @@
 				position: absolute;
 				height: 2px;
 				width: 100%;
-				background: #fff;
+				background: #000;
 				border-radius: 9px;
 				opacity: 1;
 				left: 0;
@@ -99,9 +98,10 @@
     left: -400px;
     position: fixed;
     width: 400px;
+	max-width: 100%;
     height: 100%;
     background-color: #080808;
-    z-index: 99;
+    z-index: 99999;
     @include transition(all 0.5s);
 
     &.active {
@@ -113,12 +113,189 @@
 		
 		.side-logo {
 			padding-bottom: 30px;
-			max-width: 100%;
+			max-width: 140px;
+			margin: 0 auto;
 			
 			img{
 				width: 100%;
 			}
 		}
+		.sidebar-menu{
+			ul:not(.children){
+				padding: 0;
+			}
+			ul{
+				li{
+					list-style: none;
+					position: relative;
+					a{
+						display: inline-block;
+						color: #fff;
+						font-size: 18px;
+						padding: 13px 8px;
+						border: 2px solid transparent;
+						&:hover {
+							border: 2px solid #ffba00;
+							color: #ffba00;
+							text-decoration: none;
+						}
+						&:focus {
+							text-decoration: none;
+						}
+					}
+					> .children {
+						display: none;
+						
+						li{
+							overflow: visible;					
+							a{
+								border: none;
+								position: relative;
+								min-width: 260px;
+							}
+							&:first-child{
+								a{
+									border: none;
+								}					
+							}
+							&.page_item_has_children{
+								> a {
+									width: 100%;
+									transition-delay: 0.2s;
+									-moz-transition: width 0.3s;
+									-o-transition: width 0.3s;
+									-webkit-transition: width 0.3s;
+									transition: width 0.3s;
+								}
+								&:hover {
+									width: 120%;
+								}	
+								.children {
+									top: 0;
+									left: 100%;
+									transition-delay: 0.2s;
+									-moz-transition: all 0.5s;
+									-o-transition: all 0.5s;
+									-webkit-transition: all 0.5s;
+									transition: all 0.5s;
+								}
+							}	
+						}
+					}
+					&.page_item_has_children{
+						&> a{
+							padding-right: 30px;
+							&:after{
+								content: '\f107';
+								font-family: FontAwesome;
+								padding-left: 10px;
+								position: absolute;
+							}
+						}
+					}			
+				}				
+			}
+		}
     }
     
+}
+
+.site-header {
+	background: #000;
+	padding: 5px 0;
+	position: relative;
+	z-index: 9999;
+	#side-logo img{
+		max-height: 140px;
+	}
+	.header-menu{
+		padding-top: 28px;
+		li{
+			list-style: none;
+			float: left;
+			padding-left: 10px;
+			position: relative;
+			a{
+				display: inline-block;
+				color: #fff;
+				font-size: 18px;
+				padding: 13px 8px;
+				border: 2px solid transparent;
+				&:hover {
+					border: 2px solid #ffba00;
+					color: #ffba00;
+					text-decoration: none;
+				}
+				&:focus {
+					text-decoration: none;
+				}
+			}
+			> .children {
+				display: none;
+				position: absolute;
+				margin: 0;
+				padding: 0;
+				z-index: 1;
+				li{
+					padding: 0;	
+					overflow: visible;					
+					a{
+						border-radius: 5px;
+						border: none;
+						border-top: 1px solid #ffba00;
+						background: #000;
+						position: relative;
+						min-width: 260px;
+					}
+					&:first-child{
+						a{
+							border: none;
+						}					
+					}
+					&.page_item_has_children{
+						> a {
+							width: 100%;
+							transition-delay: 0.2s;
+							-moz-transition: width 0.3s;
+							-o-transition: width 0.3s;
+							-webkit-transition: width 0.3s;
+							transition: width 0.3s;
+						}
+						&:hover {
+							width: 120%;
+							.children {
+								opacity: 1;
+							}
+						}	
+						.children {
+							top: 0;
+							left: 100%;
+							opacity: 0;
+							transition-delay: 0.2s;
+							-moz-transition: all 0.5s;
+							-o-transition: all 0.5s;
+							-webkit-transition: all 0.5s;
+							transition: all 0.5s;
+						}
+					}	
+				}
+			}
+			&.page_item_has_children{
+				&> a{
+					padding-right: 30px;
+					&:after{
+						content: '\f107';
+						font-family: FontAwesome;
+						padding-left: 10px;
+						position: absolute;
+					}
+				}
+			}			
+			&:hover{
+				> .children {
+					display: block;
+				}
+			}
+		}
+	}
 }

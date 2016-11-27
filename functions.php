@@ -18,7 +18,6 @@ require_once( get_template_directory() . '/includes/extends/tgm/class-tgm-init.p
 require_once( get_template_directory() . '/includes/theme-settings.php');
 require_once( get_template_directory() . '/includes/theme-inline-styles.php');
 require_once( get_template_directory() . '/includes/extends/cmb/theme-metaboxes.php');
-require_once( get_template_directory() . '/includes/theme-custom-posttypes.php');
 require_once( get_template_directory() . '/includes/theme-actions.php');
 require_once( get_template_directory() . '/includes/theme-widgets.php');
 require_once( get_template_directory() . '/includes/theme-functions.php');

@@ -1,13 +1,14 @@
 <?php get_header(); ?>
 
-<div id="content" class="site-content container">
-
 	<?php if (have_posts()): while (have_posts()) : the_post(); ?>
 
 	
 		<!-- post thumbnail -->
-			<?php the_post_thumbnail(); // Fullsize image for the single post ?>
+			<?php 	$id = get_the_ID();
+					the_photo_single_feat_img( $id );	?>
 		<!-- /post thumbnail -->
+		
+		<div id="content" class="site-content container">
 		
 		<?php the_photo_before_single_post(); ?>
 		
@@ -37,6 +38,18 @@
 					<p><?php _e( 'Categorised in: ', 'the_photo' ); the_category(', '); // Separated by commas ?></p>
 
 					<p><?php _e( 'This post was written by ', 'the_photo' ); the_author(); ?></p>
+					
+					<?php
+					$images = get_post_meta( $id, 'the_photo_ps_photo');
+
+						foreach($images[0] as $image){ 
+							$meta = the_photo_read_image_metadata( $image["the_photo_ps_image"] );
+							echo wp_get_attachment_image($image["the_photo_ps_image_id"], 'full');
+							echo $meta;
+						}
+						
+					
+					?>
 
 					<?php edit_post_link(); // Always handy to have Edit Post Links available ?>
 
@@ -50,7 +63,9 @@
 			<?php endwhile; ?>
 
 			<?php else: ?>
-
+			
+			<div id="content" class="site-content container">
+			
 				<!-- article -->
 				<article>
 

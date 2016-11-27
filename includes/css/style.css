@@ -2,6 +2,24 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 1, sass/_common.scss */
+body {
+  font-family: 'Open Sans Light', sans-serif;
+}
+
+/* line 4, sass/_common.scss */
+a {
+  -moz-transition: ease-in-out 0.5s;
+  -o-transition: ease-in-out 0.5s;
+  -webkit-transition: ease-in-out 0.5s;
+  transition: ease-in-out 0.5s;
+}
+
+/* line 7, sass/_common.scss */
+img {
+  max-width: 100%;
+}
+
 /* line 1, sass/_container.scss */
 .site-content {
   padding-top: 100px;
@@ -9,68 +27,67 @@
 
 /* line 1, sass/_header.scss */
 .sidebar-button, .sidebar-close {
-  z-index: 99999;
+  z-index: 999999;
   display: inline-block;
   color: #000;
   font-size: 36px;
   line-height: 36px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 20px 18px;
   margin: 10px;
-  z-index: 999;
   position: fixed;
   transition: all 0.5s;
   border: none;
-  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
-  opacity: 1;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
   transition-delay: 0.5s;
   border-radius: 50%;
 }
-/* line 18, sass/_header.scss */
+/* line 17, sass/_header.scss */
 .sidebar-button:focus, .sidebar-close:focus {
   border: none;
   outline: none;
 }
-/* line 22, sass/_header.scss */
+/* line 21, sass/_header.scss */
 .sidebar-button:hover, .sidebar-close:hover {
   border: none;
 }
-/* line 25, sass/_header.scss */
+/* line 24, sass/_header.scss */
 .sidebar-button:active, .sidebar-close:active {
   border: none;
 }
-/* line 28, sass/_header.scss */
+/* line 27, sass/_header.scss */
 .sidebar-button.active, .active.sidebar-close {
   transition-delay: 0s;
   transition: all 0.2s;
 }
-/* line 33, sass/_header.scss */
+/* line 32, sass/_header.scss */
 .sidebar-button.active #nav-icon span:nth-child(1), .active.sidebar-close #nav-icon span:nth-child(1) {
   top: 14px;
   width: 0%;
   left: 50%;
 }
-/* line 39, sass/_header.scss */
+/* line 38, sass/_header.scss */
 .sidebar-button.active #nav-icon span:nth-child(2), .active.sidebar-close #nav-icon span:nth-child(2) {
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/* line 43, sass/_header.scss */
+/* line 42, sass/_header.scss */
 .sidebar-button.active #nav-icon span:nth-child(3), .active.sidebar-close #nav-icon span:nth-child(3) {
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-/* line 47, sass/_header.scss */
+/* line 46, sass/_header.scss */
 .sidebar-button.active #nav-icon span:nth-child(4), .active.sidebar-close #nav-icon span:nth-child(4) {
   top: 14px;
   width: 0%;
   left: 50%;
 }
-/* line 54, sass/_header.scss */
+/* line 53, sass/_header.scss */
 .sidebar-button #nav-icon, .sidebar-close #nav-icon {
   width: 35px;
   height: 30px;
@@ -85,13 +102,13 @@
   transition: ease-in-out 0.5s;
   cursor: pointer;
 }
-/* line 62, sass/_header.scss */
+/* line 61, sass/_header.scss */
 .sidebar-button #nav-icon span, .sidebar-close #nav-icon span {
   display: block;
   position: absolute;
   height: 2px;
   width: 100%;
-  background: #fff;
+  background: #000;
   border-radius: 9px;
   opacity: 1;
   left: 0;
@@ -104,35 +121,36 @@
   -webkit-transition: ease-in-out 0.5s;
   transition: ease-in-out 0.5s;
 }
-/* line 74, sass/_header.scss */
+/* line 73, sass/_header.scss */
 .sidebar-button #nav-icon span:nth-child(1), .sidebar-close #nav-icon span:nth-child(1) {
   top: 3px;
 }
-/* line 78, sass/_header.scss */
+/* line 77, sass/_header.scss */
 .sidebar-button #nav-icon span:nth-child(2), .sidebar-close #nav-icon span:nth-child(2), .sidebar-button #nav-icon span:nth-child(3), .sidebar-close #nav-icon span:nth-child(3) {
   top: 14px;
 }
-/* line 82, sass/_header.scss */
+/* line 81, sass/_header.scss */
 .sidebar-button #nav-icon span:nth-child(4), .sidebar-close #nav-icon span:nth-child(4) {
   top: 25px;
 }
 
-/* line 89, sass/_header.scss */
+/* line 88, sass/_header.scss */
 .sidebar-close {
   color: #fff;
   background-color: transparent;
   z-index: 899;
 }
 
-/* line 97, sass/_header.scss */
+/* line 96, sass/_header.scss */
 #sidebar {
   float: left;
   left: -400px;
   position: fixed;
   width: 400px;
+  max-width: 100%;
   height: 100%;
   background-color: #080808;
-  z-index: 99;
+  z-index: 99999;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -149,56 +167,296 @@
 /* line 114, sass/_header.scss */
 #sidebar .sidebar-wrapper .side-logo {
   padding-bottom: 30px;
-  max-width: 100%;
+  max-width: 140px;
+  margin: 0 auto;
 }
-/* line 118, sass/_header.scss */
+/* line 119, sass/_header.scss */
 #sidebar .sidebar-wrapper .side-logo img {
   width: 100%;
 }
+/* line 124, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul:not(.children) {
+  padding: 0;
+}
+/* line 128, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li {
+  list-style: none;
+  position: relative;
+}
+/* line 131, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li a {
+  display: inline-block;
+  color: #fff;
+  font-size: 18px;
+  padding: 13px 8px;
+  border: 2px solid transparent;
+}
+/* line 137, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li a:hover {
+  border: 2px solid #ffba00;
+  color: #ffba00;
+  text-decoration: none;
+}
+/* line 142, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li a:focus {
+  text-decoration: none;
+}
+/* line 146, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li > .children {
+  display: none;
+}
+/* line 149, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li > .children li {
+  overflow: visible;
+}
+/* line 151, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li > .children li a {
+  border: none;
+  position: relative;
+  min-width: 260px;
+}
+/* line 157, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li > .children li:first-child a {
+  border: none;
+}
+/* line 162, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li > .children li.page_item_has_children > a {
+  width: 100%;
+  transition-delay: 0.2s;
+  -moz-transition: width 0.3s;
+  -o-transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+/* line 170, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li > .children li.page_item_has_children:hover {
+  width: 120%;
+}
+/* line 173, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li > .children li.page_item_has_children .children {
+  top: 0;
+  left: 100%;
+  transition-delay: 0.2s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+/* line 186, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li.page_item_has_children > a {
+  padding-right: 30px;
+}
+/* line 188, sass/_header.scss */
+#sidebar .sidebar-wrapper .sidebar-menu ul li.page_item_has_children > a:after {
+  content: '\f107';
+  font-family: FontAwesome;
+  padding-left: 10px;
+  position: absolute;
+}
+
+/* line 203, sass/_header.scss */
+.site-header {
+  background: #000;
+  padding: 5px 0;
+  position: relative;
+  z-index: 9999;
+}
+/* line 208, sass/_header.scss */
+.site-header #side-logo img {
+  max-height: 140px;
+}
+/* line 211, sass/_header.scss */
+.site-header .header-menu {
+  padding-top: 28px;
+}
+/* line 213, sass/_header.scss */
+.site-header .header-menu li {
+  list-style: none;
+  float: left;
+  padding-left: 10px;
+  position: relative;
+}
+/* line 218, sass/_header.scss */
+.site-header .header-menu li a {
+  display: inline-block;
+  color: #fff;
+  font-size: 18px;
+  padding: 13px 8px;
+  border: 2px solid transparent;
+}
+/* line 224, sass/_header.scss */
+.site-header .header-menu li a:hover {
+  border: 2px solid #ffba00;
+  color: #ffba00;
+  text-decoration: none;
+}
+/* line 229, sass/_header.scss */
+.site-header .header-menu li a:focus {
+  text-decoration: none;
+}
+/* line 233, sass/_header.scss */
+.site-header .header-menu li > .children {
+  display: none;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+/* line 239, sass/_header.scss */
+.site-header .header-menu li > .children li {
+  padding: 0;
+  overflow: visible;
+}
+/* line 242, sass/_header.scss */
+.site-header .header-menu li > .children li a {
+  border-radius: 5px;
+  border: none;
+  border-top: 1px solid #ffba00;
+  background: #000;
+  position: relative;
+  min-width: 260px;
+}
+/* line 251, sass/_header.scss */
+.site-header .header-menu li > .children li:first-child a {
+  border: none;
+}
+/* line 256, sass/_header.scss */
+.site-header .header-menu li > .children li.page_item_has_children > a {
+  width: 100%;
+  transition-delay: 0.2s;
+  -moz-transition: width 0.3s;
+  -o-transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+/* line 264, sass/_header.scss */
+.site-header .header-menu li > .children li.page_item_has_children:hover {
+  width: 120%;
+}
+/* line 266, sass/_header.scss */
+.site-header .header-menu li > .children li.page_item_has_children:hover .children {
+  opacity: 1;
+}
+/* line 270, sass/_header.scss */
+.site-header .header-menu li > .children li.page_item_has_children .children {
+  top: 0;
+  left: 100%;
+  opacity: 0;
+  transition-delay: 0.2s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+/* line 284, sass/_header.scss */
+.site-header .header-menu li.page_item_has_children > a {
+  padding-right: 30px;
+}
+/* line 286, sass/_header.scss */
+.site-header .header-menu li.page_item_has_children > a:after {
+  content: '\f107';
+  font-family: FontAwesome;
+  padding-left: 10px;
+  position: absolute;
+}
+/* line 295, sass/_header.scss */
+.site-header .header-menu li:hover > .children {
+  display: block;
+}
 
 /* line 1, sass/_post.scss */
+#page {
+  overflow: hidden;
+}
+
+/* line 5, sass/_post.scss */
+.blog article {
+  padding: 50px 0;
+}
+/* line 7, sass/_post.scss */
+.blog article .article-wrapper {
+  padding: 25px 0;
+}
+/* line 9, sass/_post.scss */
+.blog article .article-wrapper h2 {
+  margin-top: 0;
+}
+/* line 11, sass/_post.scss */
+.blog article .article-wrapper h2 a {
+  color: #000;
+  font-weight: 900;
+}
+/* line 17, sass/_post.scss */
+.blog article:before {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 200%;
+  position: relative;
+  right: 130%;
+}
+/* line 25, sass/_post.scss */
+.blog article:after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 200%;
+  position: relative;
+  left: 30%;
+}
+/* line 33, sass/_post.scss */
+.blog article:first-of-type {
+  padding-top: 20px;
+}
+/* line 36, sass/_post.scss */
+.blog article:last-of-type {
+  padding-bottom: 20px;
+}
+
+/* line 42, sass/_post.scss */
 .slider-wrapper {
   height: 600px;
+  position: relative;
 }
-/* line 3, sass/_post.scss */
+/* line 45, sass/_post.scss */
 .slider-wrapper .post-slider {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
 }
-/* line 8, sass/_post.scss */
+/* line 49, sass/_post.scss */
 .slider-wrapper .post-slider .header-slide {
   height: 600px;
   background-size: cover;
   background-position: center;
 }
-/* line 14, sass/_post.scss */
+/* line 55, sass/_post.scss */
 .slider-wrapper .featured-image {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
 }
-/* line 19, sass/_post.scss */
+/* line 60, sass/_post.scss */
 .slider-wrapper .featured-image .header-img {
   height: 600px;
   background-size: cover;
   background-position: center;
 }
-/* line 26, sass/_post.scss */
+/* line 67, sass/_post.scss */
 .slider-wrapper .photo-team {
   position: absolute;
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid;
   z-index: 2;
   right: 0;
+  bottom: 0;
 }
-/* line 33, sass/_post.scss */
+/* line 75, sass/_post.scss */
 .slider-wrapper .photo-team div {
   width: 100%;
 }
-/* line 37, sass/_post.scss */
+/* line 79, sass/_post.scss */
 .slider-wrapper .owl-controls {
   display: none !important;
 }
@@ -300,4 +558,40 @@
 .preloader .cs-loader-inner label:nth-child(1) {
   -webkit-animation: lol 3s 500ms infinite ease-in-out;
   animation: lol 3s 500ms infinite ease-in-out;
+}
+
+/* line 1, sass/_footer.scss */
+.footer {
+  padding: 65px 0;
+  font-size: 16px;
+}
+/* line 4, sass/_footer.scss */
+.footer .widget {
+  padding-bottom: 40px;
+}
+/* line 6, sass/_footer.scss */
+.footer .widget .social-icon {
+  font-size: 20px;
+  padding-right: 40px;
+  text-decoration: none;
+}
+/* line 10, sass/_footer.scss */
+.footer .widget .social-icon:hover {
+  text-decoration: none;
+}
+/* line 14, sass/_footer.scss */
+.footer .widget:last-child {
+  padding-bottom: 0;
+}
+
+@media screen and (max-width: 767px) {
+  /* line 2, sass/_responsive.scss */
+  #masthead {
+    display: none;
+  }
+
+  /* line 5, sass/_responsive.scss */
+  .sidebar-wrapper .site-branding, .sidebar-wrapper .sidebar-menu {
+    display: block !important;
+  }
 }

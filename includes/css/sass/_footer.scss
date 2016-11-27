@@ -1,0 +1,18 @@
+.footer {
+	padding: 65px 0;
+	font-size: 16px;
+	.widget{
+		padding-bottom: 40px;
+		.social-icon{
+			font-size: 20px;
+			padding-right: 40px;
+			text-decoration: none;
+			&:hover{
+				text-decoration: none;
+			}
+		}
+		&:last-child{
+			padding-bottom: 0;
+		}
+	}
+}

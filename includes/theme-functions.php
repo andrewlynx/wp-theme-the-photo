@@ -9,8 +9,7 @@
 	Theme Support
 \*------------------------------------*/
 
-if (function_exists('add_theme_support'))
-{
+if (function_exists('add_theme_support')){
     // Add Menu Support
     add_theme_support('menus');
 
@@ -19,16 +18,16 @@ if (function_exists('add_theme_support'))
     add_image_size('large', 1000, '', true); // Large Thumbnail
     add_image_size('medium', 500, '', true); // Medium Thumbnail
     add_image_size('small', 300, '', true); // Small Thumbnail
-    //add_image_size('custom-size', 700, 200, true); // Custom Thumbnail Size call using the_post_thumbnail('custom-size');
+	add_image_size('blog-preview', 460, 460, true); // Medium Thumbnail
 
     // Add Support for Custom Backgrounds - Uncomment below if you're going to use
     add_theme_support('custom-background', array(
-	'default-color' => 'FFF',
-	//'default-image' => get_template_directory_uri() . '/img/bg.jpg'
+		'default-color' => 'FFF',
     ));
 
     // Enables post and comment RSS feed links to head
     add_theme_support('automatic-feed-links');
+	add_theme_support( "title-tag" );
 
     // Localisation Support
     load_theme_textdomain('the_photo', get_template_directory() . '/languages');
@@ -40,36 +39,37 @@ if (function_exists('add_theme_support'))
 
 if ( ! function_exists( 'the_photo_body_classes' ) ) :
 function the_photo_body_classes( $classes ) {
-	global $movement_config;
-	$posts_page = get_option( 'page_for_posts' );	
 	
+	if( !is_singular() ){
+		$classes[] = 'blog';
+	}
 	$classes[] = 'loading';
 
 	return $classes;
 }
-endif; //movement_body_classes
+endif;
 
 // The Photo navigation
 if ( ! function_exists( 'the_photo_nav' ) ) {
 	function the_photo_nav(){
 		wp_nav_menu(
-		array(
-			'theme_location'  => 'header-menu',
-			'menu'            => '',
-			'container'       => 'div',
-			'container_class' => 'menu-{menu slug}-container',
-			'container_id'    => '',
-			'menu_class'      => 'menu',
-			'menu_id'         => '',
-			'echo'            => true,
-			'fallback_cb'     => 'wp_page_menu',
-			'before'          => '',
-			'after'           => '',
-			'link_before'     => '',
-			'link_after'      => '',
-			'items_wrap'      => '<ul>%3$s</ul>',
-			'depth'           => 0,
-			'walker'          => ''
+			array(
+				'theme_location'  => 'header-menu',
+				'menu'            => '',
+				'container'       => 'div',
+				'container_class' => 'header-menu-container',
+				'container_id'    => '',
+				'menu_class'      => 'menu',
+				'menu_id'         => '',
+				'echo'            => true,
+				'fallback_cb'     => 'wp_page_menu',
+				'before'          => '',
+				'after'           => '',
+				'link_before'     => '',
+				'link_after'      => '',
+				'items_wrap'      => '<ul>%3$s</ul>',
+				'depth'           => 0,
+				'walker'          => ''
 			)
 		);
 	}
@@ -110,15 +110,6 @@ function the_photo_header_scripts()
     }
 }
 
-// Load The Photo conditional scripts
-function the_photo_conditional_scripts()
-{
-    if (is_page('pagenamehere')) {
-        wp_register_script('scriptname', get_template_directory_uri() . '/includes/js/scriptname.js', array('jquery'), '1.0.0'); // Conditional script(s)
-        wp_enqueue_script('scriptname'); // Enqueue it!
-    }
-}
-
 // Load The Photo styles
 function the_photo_styles()
 {
@@ -148,36 +139,16 @@ function the_photo_styles()
 }
 
 // Register The Photo Navigation
-function register_html5_menu()
+function the_photo_register_menu()
 {
     register_nav_menus(array( // Using array to specify more menus if needed
         'header-menu' => __('Header Menu', 'the_photo'), // Main Navigation
         'sidebar-menu' => __('Sidebar Menu', 'the_photo'), // Sidebar Navigation
-        'extra-menu' => __('Extra Menu', 'the_photo') // Extra Navigation if needed (duplicate as many as you need!)
     ));
 }
 
-// Remove the <div> surrounding the dynamic navigation to cleanup markup
-function my_wp_nav_menu_args($args = '')
-{
-    $args['container'] = false;
-    return $args;
-}
-
-// Remove Injected classes, ID's and Page ID's from Navigation <li> items
-function my_css_attributes_filter($var)
-{
-    return is_array($var) ? array() : '';
-}
-
-// Remove invalid rel attribute values in the categorylist
-function remove_category_rel_from_category_list($thelist)
-{
-    return str_replace('rel="category tag"', 'rel="tag"', $thelist);
-}
-
 // Add page slug to body class, love this - Credit: Starkers Wordpress Theme
-function add_slug_to_body_class($classes)
+function the_photo_slug_to_body_class($classes)
 {
     global $post;
     if (is_home()) {
@@ -194,19 +165,14 @@ function add_slug_to_body_class($classes)
     return $classes;
 }
 
-// Remove wp_head() injected Recent Comment styles
-function my_remove_recent_comments_style()
-{
-    global $wp_widget_factory;
-    remove_action('wp_head', array(
-        $wp_widget_factory->widgets['WP_Widget_Recent_Comments'],
-        'recent_comments_style'
-    ));
+// Add custom classes to posts in blog listing
+function the_photo_post_classes( $classes ) {
+	/*$classes[] = 'has-post-thumbnail';*/
+	return $classes;
 }
 
 // Pagination for paged posts, Page 1, Page 2, Page 3, with Next and Previous Links, No plugin
-function html5wp_pagination()
-{
+function the_photo_pagination(){
     global $wp_query;
     $big = 999999999;
     echo paginate_links(array(
@@ -220,7 +186,7 @@ function html5wp_pagination()
 // Custom Excerpts
 function html5wp_index($length) // Create 20 Word Callback for Index page Excerpts, call using html5wp_excerpt('html5wp_index');
 {
-    return 20;
+    return 100;
 }
 
 // Create 40 Word Callback for Custom Post Excerpts, call using html5wp_excerpt('html5wp_custom_post');
@@ -352,6 +318,10 @@ if(!function_exists('the_photo_thumb_or_slider')){
 
 if(!function_exists('the_photo_get_header_logo')){
 	function the_photo_get_header_logo() {
+	$header = get_option('the_photo_header_visible', 'on'); 
+	if($header == 'on'){
+		return;
+	}			
 	if( !is_front_page() && !is_singular() ){ ?>
 		<div id="main-logo" class="main-logo container text-center">
 			<?php 
@@ -382,13 +352,13 @@ if(!function_exists('the_photo_get_sidebar_logo')){
 						<img src="<?php echo $logo; ?>">
 					<?php } else { ?>
 						<h2><?php echo get_bloginfo( 'name', 'display' ); ?></h2>
+						<?php 
+						$description = get_bloginfo( 'description', 'display' );
+						if ( $description || is_customize_preview() ) : ?>
+							<p class="site-description"><?php echo $description; ?></p>
+						<?php endif; ?>
 					<?php } ?>
 					</a>
-					<?php 
-					$description = get_bloginfo( 'description', 'display' );
-					if ( $description || is_customize_preview() ) : ?>
-						<p class="site-description"><?php echo $description; ?></p>
-					<?php endif; ?>
 				</div> 
 			<?php
 	}
@@ -497,4 +467,150 @@ if(!function_exists('the_photo_single_feat_img')){
 		
 		endif;
 	}
+}
+
+if(!function_exists('the_photo_get_footer')){
+	function the_photo_get_footer(){
+		$columns = get_option('the_photo_footer_sidebar', '2');	
+		$out = '';
+		ob_start();
+		switch ($columns) {
+			case 1:
+				?>
+				<div class="col-md-12">
+					 <?php the_photo_sidebar( 'footer1' ); ?>
+				</div>
+				<?php
+				break;
+			case 2:
+				?>
+				<div class="col-md-6">
+					<?php the_photo_sidebar( 'footer1' ); ?>
+				</div>
+				<div class="col-md-6">
+					<?php the_photo_sidebar( 'footer2' ); ?>
+				</div>
+				<?php
+				break;
+			case 3:
+				?>
+				<div class="col-md-4">
+					<?php the_photo_sidebar( 'footer1' ); ?>
+				</div>
+				<div class="col-md-8">
+					<?php the_photo_sidebar( 'footer2' ); ?>
+				</div>
+				<?php 
+				break;
+			case 4:
+				?>
+				<div class="col-md-8">
+					<?php the_photo_sidebar( 'footer1' ); ?>
+				</div>
+				<div class="col-md-4">
+					<?php the_photo_sidebar( 'footer2' ); ?>
+				</div>
+				<?php 
+				break;
+			case 5:
+				?>
+				<div class="col-md-4">
+					<?php the_photo_sidebar( 'footer1' ); ?>
+				</div>
+				<div class="col-md-4">
+					<?php the_photo_sidebar( 'footer2' ); ?>
+				</div>
+				<div class="col-md-4">
+					<?php the_photo_sidebar( 'footer3' ); ?>
+				</div>
+				<?php 
+				break;				
+			case 6:
+				?>
+				<div class="col-md-3">
+					<?php the_photo_sidebar( 'footer1' ); ?>
+				</div>
+				<div class="col-md-3">
+					<?php the_photo_sidebar( 'footer2' ); ?>
+				</div>
+				<div class="col-md-3">
+					<?php the_photo_sidebar( 'footer3' ); ?>
+				</div>
+				<div class="col-md-3">
+					<?php the_photo_sidebar( 'footer4' ); ?>
+				</div>	
+				<?php 
+				break;
+		}
+		ob_end_flush();
+	}
+}
+
+if(!function_exists('the_photo_read_image_metadata')){
+	function the_photo_read_image_metadata( $file ) {
+		$out = '';
+		$exif = array(
+			'Model',
+			'ExposureTime',
+			'FocalLength',
+			'ISOSpeedRatings',
+			'FNumber',
+		);
+		$meta = exif_read_data($file);
+		foreach($meta as $field => $value){
+			if(in_array($field, $exif)){
+				$divider = explode('/',$value);
+				switch ($field){
+					case 'ExposureTime':
+						$field = 'Exposure Time';
+						$value = '1/' . $divider[1]/$divider[0] . ' s';
+						break;
+					case 'FocalLength':
+						$field = 'Focal Length';
+						$value = $divider[0]/$divider[1] . ' mm';
+						break;
+					case 'ISOSpeedRatings':
+						$field = 'ISO';
+						break;
+					case 'FNumber':
+						$field = 'Aperture';
+						$value = 'F/' . $divider[0]/$divider[1];
+						break;
+				}
+					
+				$out .= $field . ': ' . $value . '<br>';
+			}
+		}
+		return $out;
+	}
+}
+
+function the_photo_attachment_field_credit( $form_fields, $post ) {
+	$form_fields['be-photographer-name'] = array(
+		'label' => 'Photographer Name',
+		'input' => 'text',
+		'value' => get_post_meta( $post->ID, 'be_photographer_name', true ),
+		'helps' => 'If provided, photo credit will be displayed',
+	);
+
+	$form_fields['be-photographer-url'] = array(
+		'label' => 'Photographer URL',
+		'input' => 'text',
+		'value' => get_post_meta( $post->ID, 'be_photographer_url', true ),
+		'helps' => 'Add Photographer URL',
+	);
+
+	return $form_fields;
+}
+
+
+
+function the_photo_attachment_field_credit_save( $post, $attachment ) {
+	if( isset( $attachment['be-photographer-name'] ) )
+		update_post_meta( $post['ID'], 'be_photographer_name', $attachment['be-photographer-name'] );
+
+	if( isset( $attachment['be-photographer-url'] ) )
+update_post_meta( $post['ID'], 'be_photographer_url', esc_url( $attachment['be-photographer-url'] ) );
+
+	return $post;
 }

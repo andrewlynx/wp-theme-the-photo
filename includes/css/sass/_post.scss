@@ -1,10 +1,51 @@
+#page {
+  overflow: hidden;
+}
+.blog {
+	article {
+		padding: 50px 0;		
+		.article-wrapper {
+			padding: 25px 0;
+			h2 {
+				margin-top: 0;
+				a {
+				  color: #000;
+				  font-weight: 900;
+				}
+			}
+		}
+		&:before {
+			content: '';
+			display: block;
+			height: 2px;
+			width: 200%;
+			position: relative;
+			right: 130%;
+		}
+		&:after {
+			content: '';
+			display: block;
+			height: 2px;
+			width: 200%;
+			position: relative;
+			left: 30%;
+		}
+		&:first-of-type {
+			padding-top: 20px;
+		}
+		&:last-of-type {
+			padding-bottom: 20px;
+		}
+	}
+}
+
 .slider-wrapper{
 	height: 600px;
+	position: relative;
 	.post-slider{
 		position: absolute;
 		left: 0;
 		right: 0;
-		top: 0;
 		.header-slide {
 			height: 600px;
 			background-size: cover;		
@@ -29,6 +70,7 @@
 		border: 1px solid;
 		z-index: 2;
 		right: 0;
+		bottom: 0;
 		
 		div{
 			width: 100%;

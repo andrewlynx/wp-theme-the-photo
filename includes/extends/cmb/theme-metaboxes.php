@@ -27,7 +27,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 		$meta_boxes['post_slider'] = array(
 		'id'         => 'post_slider',
 		'title'      => __( 'Add slider to the header instead of featured image. Slider proportions are 2/1 (width/heigth)', 'cmb' ),
-		'pages'      => array( 'post', ), // Post type
+		'pages'      => array( 'photosessions', ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
 		'show_names' => true, // Show field names on the left
@@ -55,63 +55,49 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 	$meta_boxes['shooting_team'] = array(
 		'id'         => 'shooting_team',
 		'title'      => __( 'Photoshoot Team', 'cmb' ),
-		'pages'      => array( 'post', ), // Post type
+		'pages'      => array( 'photosessions', ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
 		'show_names' => true, // Show field names on the left
 		'fields'     => array(
 			array(
 				'name'       => __( 'Photographer', 'cmb' ),
-				//'desc'       => __( '', 'cmb' ),
 				'id'         => $prefix . 'photographer',
 				'type'       => 'text',
-				'show_on_cb' => 'cmb_test_text_show_on_cb', // function should return a bool value
-				// 'sanitization_cb' => 'my_custom_sanitization', // custom sanitization callback parameter
-				// 'escape_cb'       => 'my_custom_escaping',  // custom escaping callback parameter
-				// 'on_front'        => false, // Optionally designate a field to wp-admin only
-				// 'repeatable'      => true,
+				'show_on_cb' => 'cmb_test_text_show_on_cb', 
 			),
 			array(
 				'name'       => __( 'Assistant', 'cmb' ),
-				//'desc'       => __( '', 'cmb' ),
 				'id'         => $prefix . 'assistant',
 				'type'       => 'text',
 				'show_on_cb' => 'cmb_test_text_show_on_cb',
-				'repeatable'      => false,
 			),
 			array(
 				'name'       => __( 'Makeup', 'cmb' ),
-				//'desc'       => __( '', 'cmb' ),
 				'id'         => $prefix . 'makeup',
 				'type'       => 'text',
 				'show_on_cb' => 'cmb_test_text_show_on_cb', 
-				'repeatable'      => false,
 			),
 			array(
 				'name'       => __( 'Location', 'cmb' ),
-				//'desc'       => __( '', 'cmb' ),
 				'id'         => $prefix . 'location',
 				'type'       => 'text',
 				'show_on_cb' => 'cmb_test_text_show_on_cb', 
-				'repeatable'      => false,
 			),
 			array(
 				'id'          => $prefix . 'add_team',
 				'type'        => 'group',
 				'description' => __( 'Add team', 'cmb' ),
 				'options'     => array(
-					//'group_title'   => __( 'Team member', 'cmb' ), // {#} gets replaced by row number
 					'add_button'    => __( 'Add Team Member', 'cmb' ),
 					'remove_button' => __( 'Remove Team Member', 'cmb' ),
 					'sortable'      => true, // beta
 				),
-				// Fields array works the same, except id's only need to be unique for this group. Prefix is not needed.
 				'fields'      => array(
 					array(
 						'name' => 'Role',
 						'id'   => 'role',
 						'type' => 'text',
-						// 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
 					),
 					array(
 						'name' => 'Member',
@@ -331,6 +317,35 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 			// ),
 		),
 	);
+	
+	$meta_boxes['photosession_images'] = array(
+		'id'         => 'photosession_images',
+		'title'      => __( 'Photosession Images', 'cmb' ),
+		'pages'      => array( 'photosessions', ), // Post type
+		'context'    => 'normal',
+		'priority'   => 'high',
+		'show_names' => true, // Show field names on the left
+		'fields'     => array(
+			array(
+				'id'          => $prefix . 'ps_photo',
+				'type'        => 'group',
+				'description' => __( 'Add Photos', 'cmb' ),
+				'options'     => array(
+					'add_button'    => __( 'Add Photo', 'cmb' ),
+					'remove_button' => __( 'Remove Photo', 'cmb' ),
+					'sortable'      => true, // beta
+				),
+				'fields'      => array(
+					array(
+						'name' => __( 'Image', 'cmb' ),
+						'desc' => __( 'Upload an image or enter a URL.', 'cmb' ),
+						'id'   => $prefix . 'ps_image',
+						'type' => 'file',
+					),
+				),
+			),
+		),
+	);
 
 	/**
 	 * Metabox to be displayed on a single page ID
@@ -356,7 +371,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 	/**
 	 * Repeatable Field Groups
 	 */
-	$meta_boxes['field_group'] = array(
+/* 	$meta_boxes['field_group'] = array(
 		'id'         => 'field_group',
 		'title'      => __( 'Repeating Field Group', 'cmb' ),
 		'pages'      => array( 'page', ),
@@ -398,7 +413,7 @@ function cmb_sample_metaboxes( array $meta_boxes ) {
 				),
 			),
 		),
-	);
+	); */
 
 	/**
 	 * Metabox for the user profile screen

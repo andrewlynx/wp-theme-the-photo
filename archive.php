@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+<div id="content" class="site-content container">
+
 	<main role="main">
 		<!-- section -->
 		<section>

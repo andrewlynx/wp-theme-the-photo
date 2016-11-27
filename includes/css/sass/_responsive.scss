@@ -1,0 +1,8 @@
+@media screen and (max-width: 767px){
+	#masthead {
+		display: none;
+	}
+	.sidebar-wrapper .site-branding, .sidebar-wrapper .sidebar-menu  {
+		display: block !important;
+	}
+}

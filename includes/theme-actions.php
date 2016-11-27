@@ -7,13 +7,11 @@
 // Add Actions
 add_action('init', 'the_photo_admin_scripts'); // Add Custom Scripts to wp_head
 add_action('init', 'the_photo_header_scripts'); // Add Custom Scripts to wp_head
-add_action('wp_print_scripts', 'the_photo_conditional_scripts'); // Add Conditional Page Scripts
 add_action('get_header', 'the_photo_enable_threaded_comments'); // Enable Threaded Comments
 add_action('wp_enqueue_scripts', 'the_photo_styles'); // Add Theme Stylesheet
-add_action('init', 'register_html5_menu'); // Add The Photo Menu
-add_action('init', 'the_photo_event_post_type'); // Add our The Photo Custom Post Type
+add_action('init', 'the_photo_register_menu'); // Add The Photo Menu
 add_action('widgets_init', 'the_photo_widgets_init'); // Remove inline Recent Comment Styles from wp_head()
-add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
+add_action('init', 'the_photo_pagination'); // Add our HTML5 Pagination
 
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -31,17 +29,19 @@ remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 // Add Filters
 add_filter('avatar_defaults', 'the_photogravatar'); // Custom Gravatar in Settings > Discussion
-add_filter('body_class', 'add_slug_to_body_class'); // Add slug to body class (Starkers build)
+add_filter('body_class', 'the_photo_slug_to_body_class'); // Add slug to body class (Starkers build)
 add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
-add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
+//add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
 // add_filter('nav_menu_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected classes (Commented out by default)
 // add_filter('nav_menu_item_id', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> injected ID (Commented out by default)
 // add_filter('page_css_class', 'my_css_attributes_filter', 100, 1); // Remove Navigation <li> Page ID's (Commented out by default)
-add_filter('the_category', 'remove_category_rel_from_category_list'); // Remove invalid rel attribute
 add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excerpt (Manual Excerpts only)
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
 add_filter('body_class', 'the_photo_body_classes' ); // Add custom body classes
+add_filter('post_class', 'the_photo_post_classes' ); // Add custom post classes
+add_filter( 'attachment_fields_to_edit', 'the_photo_attachment_field_credit', 10, 2 ); //Add image fields
+add_filter( 'attachment_fields_to_save', 'the_photo_attachment_field_credit_save', 10, 2 ); //Save image fields
 if( get_option('the_photo_adminbar') == 1 ){
 	add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 }

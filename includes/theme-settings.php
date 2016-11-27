@@ -127,7 +127,7 @@ function the_photo_customize( $wp_customize ) {
 			'type'           => 'option', 
 		)); 
 		$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'the_photo_header_color', array(
-			'label'    => __('Header Color', 'the_photo'),
+			'label'    => __('Headers Color', 'the_photo'),
 			'section'  => 'the_photo_fonts',
 			'settings' => 'the_photo_header_color',
 		))); 
@@ -160,7 +160,7 @@ function the_photo_customize( $wp_customize ) {
 			'type'           => 'option', 
 		)); 
 		$wp_customize->add_control('the_photo_hthree_size', array(
-			'label'      => __('Main Logo Height in pixels', 'the_photo'),
+			'label'      => __('h3 size in pixels', 'the_photo'),
 			'section'    => 'the_photo_fonts',
 			'settings'   => 'the_photo_hthree_size',
 		));
@@ -171,7 +171,7 @@ function the_photo_customize( $wp_customize ) {
 			'type'           => 'option', 
 		)); 
 		$wp_customize->add_control('the_photo_hfour_size', array(
-			'label'      => __('Main Logo Height in pixels', 'the_photo'),
+			'label'      => __('h4 size in pixels', 'the_photo'),
 			'section'    => 'the_photo_fonts',
 			'settings'   => 'the_photo_hfour_size',
 		));
@@ -182,7 +182,7 @@ function the_photo_customize( $wp_customize ) {
 			'type'           => 'option', 
 		)); 
 		$wp_customize->add_control('the_photo_hfive_size', array(
-			'label'      => __('Main Logo Height in pixels', 'the_photo'),
+			'label'      => __('h5 size in pixels', 'the_photo'),
 			'section'    => 'the_photo_fonts',
 			'settings'   => 'the_photo_hfive_size',
 		));
@@ -193,9 +193,51 @@ function the_photo_customize( $wp_customize ) {
 			'type'           => 'option', 
 		)); 
 		$wp_customize->add_control('the_photo_hsix_size', array(
-			'label'      => __('Main Logo Height in pixels', 'the_photo'),
+			'label'      => __('h6 size in pixels', 'the_photo'),
 			'section'    => 'the_photo_fonts',
 			'settings'   => 'the_photo_hsix_size',
+		));
+		
+////////////
+//////////// Header settings
+////////////
+		
+	$wp_customize->add_section( 'the_photo_header', array(
+	    'title'      => __( 'Header Settings', 'the_photo' ),
+	    'description' => '',
+	    'priority'   => 150,
+	) );
+	
+		$wp_customize->add_setting('the_photo_header_visible', array(
+			'capability' => 'edit_theme_options',
+			'type'       => 'option',
+		));
+	 
+		$wp_customize->add_control('the_photo_header_visible', array(
+			'settings' => 'the_photo_header_visible',
+			'label'    => __('Show header with menu'),
+			'section'  => 'the_photo_header',
+			        'type'    => 'select',
+			        'choices'    => array(
+			            'on' => __('Yes'),
+			            'off' => __('No (menu and logo in sidebar)'),
+			        ),
+		));
+		$wp_customize->add_setting('the_photo_header_logo_position', array(
+			'capability' => 'edit_theme_options',
+			'type'       => 'option',
+		));
+	 
+		$wp_customize->add_control('the_photo_header_logo_position', array(
+			'settings' => 'the_photo_header_logo_position',
+			'label'    => __('Logo position'),
+			'section'  => 'the_photo_header',
+			'type'    => 'select',
+			'choices'    => array(
+				'left' => __('Left'),
+				'right' => __('Right'),
+				'center' => __('Center'),
+			),
 		));
 		
 ////////////
@@ -205,7 +247,7 @@ function the_photo_customize( $wp_customize ) {
 	$wp_customize->add_section( 'the_photo_sidebar', array(
 	    'title'      => __( 'Sidebar Settings', 'the_photo' ),
 	    'description' => '',
-	    'priority'   => 150,
+	    'priority'   => 160,
 	) );
 	
 		$wp_customize->add_setting('the_photo_sidebar_background', array(
@@ -261,7 +303,7 @@ function the_photo_customize( $wp_customize ) {
 	$wp_customize->add_section( 'the_photo_post', array(
 	    'title'      => __( 'Post Settings', 'the_photo' ),
 	    'description' => '',
-	    'priority'   => 160,
+	    'priority'   => 170,
 	) );
 	
 		$wp_customize->add_setting('the_photo_post_sidebar', array(
@@ -273,13 +315,81 @@ function the_photo_customize( $wp_customize ) {
 			'settings' => 'the_photo_post_sidebar',
 			'label'    => __('Single post sidebar'),
 			'section'  => 'the_photo_post',
-			        'type'    => 'select',
-			        'choices'    => array(
-			            'no_sidebar' => __('No sidebar'),
-			            'right' => __('Right sidebar'),
-			            'left' => __('Left Sidebar'),
-			        ),
+			'type'    => 'select',
+			'choices'    => array(
+				'no_sidebar' => __('No sidebar'),
+				'right' => __('Right sidebar'),
+				'left' => __('Left Sidebar'),
+			),
 		));
+		
+		$wp_customize->add_setting('the_photo_elements_color', array(
+			'default'           => '#ffba00',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability' => 'edit_theme_options',
+			'type'       => 'option',
+		));
+	 
+		$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'the_photo_elements_color', array(
+			'label'    => __('Sidebar Background Color', 'the_photo'),
+			'section'  => 'the_photo_post',
+			'settings' => 'the_photo_elements_color',
+		)));
+		
+////////////
+//////////// Footer settings
+////////////
+		
+	$wp_customize->add_section( 'the_photo_footer', array(
+	    'title'      => __( 'Footer Settings', 'the_photo' ),
+	    'description' => '',
+	    'priority'   => 170,
+	) );
+	
+		$wp_customize->add_setting('the_photo_footer_sidebar', array(
+			'capability' => 'edit_theme_options',
+			'type'       => 'option',
+			'default'  => '2',
+		));
+	 
+		$wp_customize->add_control('the_photo_footer_sidebar', array(
+			'settings' => 'the_photo_footer_sidebar',
+			'label'    => __('Number of columns'),
+			'section'  => 'the_photo_footer',
+			'type'    => 'select',
+			'choices'    => array(
+				'1' => __('1 column'),
+				'2' => __('2 columns'),
+				'3' => __('2 columns (1 + 2)'),
+				'4' => __('2 columns (2 + 1)'),
+				'5' => __('3 columns'),
+				'6' => __('4 columns'),
+			),
+		));
+		
+		$wp_customize->add_setting('the_photo_footer_background', array(
+			'default'           => '#000',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+			'type'           => 'option', 
+		)); 
+		$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'the_photo_footer_background', array(
+			'label'    => __('Sidebar Background Color', 'the_photo'),
+			'section'  => 'the_photo_footer',
+			'settings' => 'the_photo_footer_background',
+		)));
+		
+		$wp_customize->add_setting('the_photo_footer_font_color', array(
+			'default'           => '#fff',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+			'type'           => 'option', 
+		)); 
+		$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'the_photo_footer_font_color', array(
+			'label'    => __('Link Color', 'the_photo'),
+			'section'  => 'the_photo_footer',
+			'settings' => 'the_photo_footer_font_color',
+		)));
 		
 ////////////
 //////////// Admin options
