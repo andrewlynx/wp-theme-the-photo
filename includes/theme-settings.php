@@ -215,14 +215,15 @@ function the_photo_customize( $wp_customize ) {
 	 
 		$wp_customize->add_control('the_photo_header_visible', array(
 			'settings' => 'the_photo_header_visible',
-			'label'    => __('Show header with menu'),
+			'label'    => __('Show header with menu', 'the_photo'),
 			'section'  => 'the_photo_header',
 			        'type'    => 'select',
 			        'choices'    => array(
-			            'on' => __('Yes'),
-			            'off' => __('No (menu and logo in sidebar)'),
+			            'on' => __('Yes', 'the_photo'),
+			            'off' => __('No (menu and logo in sidebar)', 'the_photo'),
 			        ),
 		));
+
 		$wp_customize->add_setting('the_photo_header_logo_position', array(
 			'capability' => 'edit_theme_options',
 			'type'       => 'option',
@@ -230,15 +231,100 @@ function the_photo_customize( $wp_customize ) {
 	 
 		$wp_customize->add_control('the_photo_header_logo_position', array(
 			'settings' => 'the_photo_header_logo_position',
-			'label'    => __('Logo position'),
+			'label'    => __('Logo position (may not show correctly in preview, apply changes and exit composer)', 'the_photo'),
 			'section'  => 'the_photo_header',
 			'type'    => 'select',
 			'choices'    => array(
-				'left' => __('Left'),
-				'right' => __('Right'),
-				'center' => __('Center'),
+				'left' => __('Left', 'the_photo'),
+				'right' => __('Right', 'the_photo'),
+				'center' => __('Center', 'the_photo'),
 			),
 		));
+
+		$wp_customize->add_setting('the_photo_transparent_header_background', array(
+			'capability' => 'edit_theme_options',
+			'type'       => 'option',
+		));
+	 
+		$wp_customize->add_control('the_photo_transparent_header_background', array(
+			'settings' => 'the_photo_transparent_header_background',
+			'label'    => __('Transparent Header', 'the_photo'),
+			'section'  => 'the_photo_header',
+			'type'     => 'checkbox',
+		));
+
+		$wp_customize->add_setting('the_photo_gradient_header_background', array(
+			'capability' => 'edit_theme_options',
+			'type'       => 'option',
+		));
+	 
+		$wp_customize->add_control('the_photo_gradient_header_background', array(
+			'settings' => 'the_photo_gradient_header_background',
+			'label'    => __('Gradient Header', 'the_photo'),
+			'section'  => 'the_photo_header',
+			'type'     => 'checkbox',
+			'active_callback' => 'the_photo_is_not_transparent_header',
+		));
+
+		$wp_customize->add_setting('the_photo_gradient_header_color_1', array(
+			'default'           => '#080808',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+			'type'           => 'option', 			
+		)); 
+		$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'the_photo_gradient_header_color_1', array(
+			'label'    => __('Header Background Color 1', 'the_photo'),
+			'section'  => 'the_photo_header',
+			'settings' => 'the_photo_gradient_header_color_1',
+			'active_callback' => 'the_photo_is_gradient_header',
+		)));
+
+		$wp_customize->add_setting('the_photo_gradient_header_color_2', array(
+			'default'           => '#080808',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+			'type'           => 'option', 			
+		)); 
+		$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'the_photo_gradient_header_color_2', array(
+			'label'    => __('Header Background Color 2', 'the_photo'),
+			'section'  => 'the_photo_header',
+			'settings' => 'the_photo_gradient_header_color_2',
+			'active_callback' => 'the_photo_is_gradient_header',
+		)));
+
+		$wp_customize->add_setting('the_photo_gradient_direction', array(
+			'capability' => 'edit_theme_options',
+			'default'    => 'l_r',
+			'type'       => 'option',
+		));
+	 
+		$wp_customize->add_control('the_photo_gradient_direction', array(
+			'settings' => 'the_photo_gradient_direction',
+			'label'    => __('Gradient Direction', 'the_photo'),
+			'section'  => 'the_photo_header',
+			'active_callback' => 'the_photo_is_gradient_header',
+			'type'    => 'select',
+			'choices'    => array(
+				'l_r' => __('Left to Right', 'the_photo'),
+				'bl_r' => __('Bottom Left to Top Right', 'the_photo'),
+				'br_l' => __('Top Left to Bottom Right', 'the_photo'),
+				'b_t' => __('Top to Bottom', 'the_photo'),
+				'rad' => __('Radial', 'the_photo'),
+			),
+		));
+
+		$wp_customize->add_setting('the_photo_header_background', array(
+			'default'           => '#080808',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'capability'        => 'edit_theme_options',
+			'type'           => 'option', 			
+		)); 
+		$wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'the_photo_header_background', array(
+			'label'    => __('Header Background Color', 'the_photo'),
+			'section'  => 'the_photo_header',
+			'settings' => 'the_photo_header_background',
+			'active_callback' => 'the_photo_is_not_solid_header',
+		)));
 		
 ////////////
 //////////// Sidebar options
@@ -313,13 +399,30 @@ function the_photo_customize( $wp_customize ) {
 	 
 		$wp_customize->add_control('the_photo_post_sidebar', array(
 			'settings' => 'the_photo_post_sidebar',
-			'label'    => __('Single post sidebar'),
+			'label'    => __('Single post sidebar', 'the_photo'),
 			'section'  => 'the_photo_post',
 			'type'    => 'select',
 			'choices'    => array(
-				'no_sidebar' => __('No sidebar'),
-				'right' => __('Right sidebar'),
-				'left' => __('Left Sidebar'),
+				'no_sidebar' => __('No sidebar', 'the_photo'),
+				'right' => __('Right sidebar', 'the_photo'),
+				'left' => __('Left Sidebar', 'the_photo'),
+			),
+		));
+
+		$wp_customize->add_setting('the_photo_cpt_sidebar', array(
+			'capability' => 'edit_theme_options',
+			'type'       => 'option',
+		));
+	 
+		$wp_customize->add_control('the_photo_cpt_sidebar', array(
+			'settings' => 'the_photo_cpt_sidebar',
+			'label'    => __('Single photosession and album sidebar', 'the_photo'),
+			'section'  => 'the_photo_post',
+			'type'    => 'select',
+			'choices'    => array(
+				'no_sidebar' => __('No sidebar', 'the_photo'),
+				'right' => __('Right sidebar', 'the_photo'),
+				'left' => __('Left Sidebar', 'the_photo'),
 			),
 		));
 		
@@ -354,16 +457,16 @@ function the_photo_customize( $wp_customize ) {
 	 
 		$wp_customize->add_control('the_photo_footer_sidebar', array(
 			'settings' => 'the_photo_footer_sidebar',
-			'label'    => __('Number of columns'),
+			'label'    => __('Number of columns', 'the_photo'),
 			'section'  => 'the_photo_footer',
 			'type'    => 'select',
 			'choices'    => array(
-				'1' => __('1 column'),
-				'2' => __('2 columns'),
-				'3' => __('2 columns (1 + 2)'),
-				'4' => __('2 columns (2 + 1)'),
-				'5' => __('3 columns'),
-				'6' => __('4 columns'),
+				'1' => __('1 column', 'the_photo'),
+				'2' => __('2 columns', 'the_photo'),
+				'3' => __('2 columns (1 + 2)', 'the_photo'),
+				'4' => __('2 columns (2 + 1)', 'the_photo'),
+				'5' => __('3 columns', 'the_photo'),
+				'6' => __('4 columns', 'the_photo'),
 			),
 		));
 		
@@ -408,7 +511,7 @@ function the_photo_customize( $wp_customize ) {
 	 
 		$wp_customize->add_control('the_photo_adminbar', array(
 			'settings' => 'the_photo_adminbar',
-			'label'    => __('Disable admin bar when logged as admin'),
+			'label'    => __('Disable admin bar when logged as admin', 'the_photo'),
 			'section'  => 'the_photo_admin',
 			'type'     => 'checkbox',
 		));
@@ -594,3 +697,27 @@ add_action('customize_register', 'the_photo_customize');
 // }
  
 // add_action('customize_register', 'the_photo_customize');
+
+function the_photo_is_not_transparent_header(){
+
+    if( empty( get_option('the_photo_transparent_header_background') ) ) {
+        return true;
+    }
+    return false;
+}
+
+function the_photo_is_not_solid_header(){
+
+    if( the_photo_is_not_transparent_header() == true AND the_photo_is_gradient_header() == false ){
+    	return true;
+    }
+    return false;
+}
+
+function the_photo_is_gradient_header(){
+
+    if( empty( get_option('the_photo_gradient_header_background') ) ) {
+        return false;
+    }
+    return true;
+}

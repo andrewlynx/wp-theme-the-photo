@@ -255,10 +255,10 @@ class cmb_Meta_Box {
 			   wp_register_script( 'iris', admin_url( 'js/iris.min.js' ), array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), self::CMB_VERSION );
 		   	wp_register_script( 'wp-color-picker', admin_url( 'js/color-picker.min.js' ), array( 'iris' ), self::CMB_VERSION );
 				wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', array(
-					'clear'         => __( 'Clear' ),
-					'defaultString' => __( 'Default' ),
-					'pick'          => __( 'Select Color' ),
-					'current'       => __( 'Current Color' ),
+					'clear'         => __( 'Clear' , 'the_photo'),
+					'defaultString' => __( 'Default' , 'the_photo'),
+					'pick'          => __( 'Select Color' , 'the_photo'),
+					'current'       => __( 'Current Color' , 'the_photo'),
 				) );
 			}
 		} else {
@@ -285,7 +285,7 @@ class cmb_Meta_Box {
 			'ajaxurl'         => admin_url( '/admin-ajax.php' ),
 			'up_arrow'        => '[ ↑ ]&nbsp;',
 			'down_arrow'      => '&nbsp;[ ↓ ]',
-			'check_toggle'    => __( 'Select / Deselect All', 'cmb' ),
+			'check_toggle'    => __( 'Select / Deselect All', 'the_photo'),
 		) ) );
 
 		wp_register_style( 'cmb-styles', CMB_META_BOX_URL . 'style'. $min .'.css', $styles );
@@ -1176,7 +1176,7 @@ function cmb_metabox_form( $meta_box, $object_id, $echo = true ) {
 
 	$form_format = apply_filters( 'cmb_frontend_form_format', '<form class="cmb-form" method="post" id="%s" enctype="multipart/form-data" encoding="multipart/form-data"><input type="hidden" name="object_id" value="%s">%s<input type="submit" name="submit-cmb" value="%s" class="button-primary"></form>', $object_id, $meta_box, $form );
 
-	$form = sprintf( $form_format, $meta_box['id'], $object_id, $form, __( 'Save' ) );
+	$form = sprintf( $form_format, $meta_box['id'], $object_id, $form, __( 'Save' , 'the_photo') );
 
 	if ( $echo )
 		echo $form;

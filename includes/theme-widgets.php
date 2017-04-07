@@ -8,8 +8,8 @@
 class the_photo_Social_Widget extends WP_Widget {
 
 	function __construct() {
-		$widget_ops = array( 'description' => __( "Displays block of cosial network links from Social tab in Customizer") );
-		parent::__construct('the_photo_sw', __('The Photo Social Widget'), $widget_ops);
+		$widget_ops = array( 'description' => __( 'Displays block of cosial network links from Social tab in Customizer', 'the_photo') );
+		parent::__construct('the_photo_sw', __('The Photo Social Widget', 'the_photo'), $widget_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -54,37 +54,37 @@ class the_photo_Social_Widget extends WP_Widget {
 
 	function form( $instance ) {
 	?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php if (isset ( $instance['title'])) {echo esc_attr( $instance['title'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('facebook'); ?>"><?php _e('Facebook:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('facebook'); ?>"><?php _e('Facebook:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('facebook'); ?>" name="<?php echo $this->get_field_name('facebook'); ?>" value="<?php if (isset ( $instance['facebook'])) {echo esc_attr( $instance['facebook'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('vk'); ?>"><?php _e('Vkontakte:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('vk'); ?>"><?php _e('Vkontakte:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('vk'); ?>" name="<?php echo $this->get_field_name('vk'); ?>" value="<?php if (isset ( $instance['vk'])) {echo esc_attr( $instance['vk'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('twitter'); ?>"><?php _e('Twitter:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('twitter'); ?>"><?php _e('Twitter:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('twitter'); ?>" name="<?php echo $this->get_field_name('twitter'); ?>" value="<?php if (isset ( $instance['twitter'])) {echo esc_attr( $instance['twitter'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('linkedin'); ?>"><?php _e('LinkedIn:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('linkedin'); ?>"><?php _e('LinkedIn:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('linkedin'); ?>" name="<?php echo $this->get_field_name('linkedin'); ?>" value="<?php if (isset ( $instance['linkedin'])) {echo esc_attr( $instance['linkedin'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('google-plus'); ?>"><?php _e('GPlus:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('google-plus'); ?>"><?php _e('GPlus:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('google-plus'); ?>" name="<?php echo $this->get_field_name('google-plus'); ?>" value="<?php if (isset ( $instance['google-plus'])) {echo esc_attr( $instance['google-plus'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('dribbble'); ?>"><?php _e('Dribbble:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('dribbble'); ?>"><?php _e('Dribbble:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('dribbble'); ?>" name="<?php echo $this->get_field_name('dribbble'); ?>" value="<?php if (isset ( $instance['dribbble'])) {echo esc_attr( $instance['dribbble'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('flickr'); ?>"><?php _e('Flickr:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('flickr'); ?>"><?php _e('Flickr:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('flickr'); ?>" name="<?php echo $this->get_field_name('flickr'); ?>" value="<?php if (isset ( $instance['flickr'])) {echo esc_attr( $instance['flickr'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('youtube'); ?>"><?php _e('Youtube:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('youtube'); ?>"><?php _e('Youtube:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('youtube'); ?>" name="<?php echo $this->get_field_name('youtube'); ?>" value="<?php if (isset ( $instance['youtube'])) {echo esc_attr( $instance['youtube'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('deviantart'); ?>"><?php _e('Deviantart:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('deviantart'); ?>"><?php _e('Deviantart:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('deviantart'); ?>" name="<?php echo $this->get_field_name('deviantart'); ?>" value="<?php if (isset ( $instance['deviantart'])) {echo esc_attr( $instance['deviantart'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('instagram'); ?>"><?php _e('Instagram:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('instagram'); ?>"><?php _e('Instagram:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('instagram'); ?>" name="<?php echo $this->get_field_name('instagram'); ?>" value="<?php if (isset ( $instance['instagram'])) {echo esc_attr( $instance['instagram'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('pinterest'); ?>"><?php _e('Pinterest:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('pinterest'); ?>"><?php _e('Pinterest:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('pinterest'); ?>" name="<?php echo $this->get_field_name('pinterest'); ?>" value="<?php if (isset ( $instance['pinterest'])) {echo esc_attr( $instance['pinterest'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('vimeo'); ?>"><?php _e('Vimeo:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('vimeo'); ?>"><?php _e('Vimeo:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('vimeo'); ?>" name="<?php echo $this->get_field_name('vimeo'); ?>" value="<?php if (isset ( $instance['vimeo'])) {echo esc_attr( $instance['vimeo'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('tumblr'); ?>"><?php _e('Tumblr:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('tumblr'); ?>"><?php _e('Tumblr:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('tumblr'); ?>" name="<?php echo $this->get_field_name('tumblr'); ?>" value="<?php if (isset ( $instance['tumblr'])) {echo esc_attr( $instance['tumblr'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('paper-plane-o'); ?>"><?php _e('paper-plane-o:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('paper-plane-o'); ?>"><?php _e('paper-plane-o:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('paper-plane-o'); ?>" name="<?php echo $this->get_field_name('paper-plane-o'); ?>" value="<?php if (isset ( $instance['paper-plane-o'])) {echo esc_attr( $instance['paper-plane-o'] );} ?>" /></p>
-		<p><label for="<?php echo $this->get_field_id('envelope-o'); ?>"><?php _e('Email:') ?></label>
+		<p><label for="<?php echo $this->get_field_id('envelope-o'); ?>"><?php _e('Email:', 'the_photo') ?></label>
 		<input type="text" class="widefat" id="<?php echo $this->get_field_id('envelope-o'); ?>" name="<?php echo $this->get_field_name('envelope-o'); ?>" value="<?php if (isset ( $instance['envelope-o'])) {echo esc_attr( $instance['envelope-o'] );} ?>" /></p>
 		
 		
@@ -116,6 +116,26 @@ if ( ! function_exists( 'the_photo_widgets_init' ) ) {
 		register_sidebar( array(
 			'name'          => __( 'Post Sidebar', 'the_photo' ),
 			'id'            => 'post',
+			'description'   => __( 'Sidebar that appears on the left or right side of posts.', 'the_photo' ),
+			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		) );
+
+		register_sidebar( array(
+			'name'          => __( 'Photosession Sidebar', 'the_photo' ),
+			'id'            => 'photosessions',
+			'description'   => __( 'Sidebar that appears on the left or right side of posts.', 'the_photo' ),
+			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		) );
+
+		register_sidebar( array(
+			'name'          => __( 'Album Sidebar', 'the_photo' ),
+			'id'            => 'albums',
 			'description'   => __( 'Sidebar that appears on the left or right side of posts.', 'the_photo' ),
 			'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</aside>',

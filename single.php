@@ -32,6 +32,8 @@
 
 					<?php the_content(); // Dynamic Content ?>
 
+					<?php wp_link_pages(); ?>
+
 					<?php the_tags( __( 'Tags: ', 'the_photo' ), ', ', '<br>'); // Separated by commas with a line break at the end ?>
 
 					<p><?php _e( 'Categorised in: ', 'the_photo' ); the_category(', '); // Separated by commas ?></p>

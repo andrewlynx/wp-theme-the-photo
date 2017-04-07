@@ -1,0 +1,1 @@
+<span class="post-author <?php echo get_post_type() ?>-author"><?php _e( 'Categorised in: ', 'the_photo' ); the_category(', ');  ?></span>

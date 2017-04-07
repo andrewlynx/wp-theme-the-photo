@@ -105,6 +105,19 @@ function the_photo_header_scripts()
         wp_enqueue_script('owl.carousel'); // Enqueue it!
 
         wp_register_script('the_photo_scripts', get_template_directory_uri() . '/includes/js/scripts.js', array(), '1.0.0', true); // Custom scripts
+
+        	$logo_option = get_option('the_photo_header_logo_position');
+        	$menu_width = 'false';
+        	if($logo_option == 'left' OR $logo_option == 'right'){
+        		$menu_width = 'true';
+        	}
+
+			// Localize the script with data
+			$options_array = array(
+				'menu_width' => $menu_width,
+			);
+			wp_localize_script( 'the_photo_scripts', 'themeOptions', $options_array );
+
         wp_enqueue_script('the_photo_scripts'); // Enqueue it!
 		
     }
@@ -238,16 +251,6 @@ function remove_thumbnail_dimensions( $html )
     return $html;
 }
 
-// Custom Gravatar in Settings > Discussion
-if(!function_exists('the_photo_gravatar')){
-	function the_photo_gravatar ($avatar_defaults)
-	{
-		$myavatar = get_template_directory_uri() . '/img/gravatar.jpg';
-		$avatar_defaults[$myavatar] = "Custom Gravatar";
-		return $avatar_defaults;
-	}
-}
-
 // Threaded Comments
 if(!function_exists('the_photo_enable_threaded_comments')){
 	function the_photo_enable_threaded_comments()
@@ -274,36 +277,8 @@ if(!function_exists('the_photo_comments')){
 			$tag = 'li';
 			$add_below = 'div-comment';
 		}
-	?>
-		<!-- heads up: starting < for the html tag (li or div) in the next line: -->
-		<<?php echo $tag ?> <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
-		<?php if ( 'div' != $args['style'] ) : ?>
-		<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
-		<?php endif; ?>
-		<div class="comment-author vcard">
-		<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment ); ?>
-		<?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link()) ?>
-		</div>
-	<?php if ($comment->comment_approved == '0') : ?>
-		<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
-		<br />
-	<?php endif; ?>
-
-		<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-			<?php
-				printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
-			?>
-		</div>
-
-		<?php comment_text() ?>
-
-		<div class="reply">
-		<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
-		</div>
-		<?php if ( 'div' != $args['style'] ) : ?>
-		</div>
-		<?php endif; ?>
-	<?php }
+		include( get_stylesheet_directory() . '/comment.php');
+	}
 }
 
 if(!function_exists('the_photo_thumb_or_slider')){
@@ -316,233 +291,85 @@ if(!function_exists('the_photo_thumb_or_slider')){
 	}
 }
 
+function the_photo_get_preloader(){
+
+	get_template_part('/templates/preloader');
+
+}
+
+function the_photo_get_menu_button(){
+	include( get_stylesheet_directory() . '/templates/menu-button.php' );
+}
+
 if(!function_exists('the_photo_get_header_logo')){
 	function the_photo_get_header_logo() {
-	$header = get_option('the_photo_header_visible', 'on'); 
-	if($header == 'on'){
-		return;
-	}			
-	if( !is_front_page() && !is_singular() ){ ?>
-		<div id="main-logo" class="main-logo container text-center">
-			<?php 
-				$logo = $width = $height = '';
-				$theme_url = get_template_directory_uri ();
-				$logo = get_option('the_photo_main_logo', $theme_url.'/includes/img/logo.png');
-				$width = get_option('the_photo_logo_width');
-				$height = get_option('the_photo_logo_height');
-			
-			if(!empty($logo)){?>
-				<img src="<?php echo $logo; ?>" width="<?php if(!empty($width)) echo esc_attr($width); ?>px" height="<?php if(!empty($height)) echo esc_attr($height); ?>px"> 
-			<?php } ?>
-		</div>
-	<?php }
+
+		$header = get_option('the_photo_header_visible', 'on'); 
+		if($header != 'on'){
+			return;
+		}			
+
+		get_template_part( '/templates/header-logo' );
+
 	}
 }
 
 if(!function_exists('the_photo_get_sidebar_logo')){
 	function the_photo_get_sidebar_logo() {
 
-			$logo = '';
-			$logo = get_option('the_photo_sidebar_logo'); ?>
-				<div id="side-logo" class="side-logo text-center">
-					<a href="<?php echo get_site_url(); ?>">
-					<?php 
-						if(!empty($logo)) {
-					?>
-						<img src="<?php echo $logo; ?>">
-					<?php } else { ?>
-						<h2><?php echo get_bloginfo( 'name', 'display' ); ?></h2>
-						<?php 
-						$description = get_bloginfo( 'description', 'display' );
-						if ( $description || is_customize_preview() ) : ?>
-							<p class="site-description"><?php echo $description; ?></p>
-						<?php endif; ?>
-					<?php } ?>
-					</a>
-				</div> 
-			<?php
+		get_template_part( '/templates/sidebar-logo' );
+
 	}
 }
 
 if(!function_exists('the_photo_photoset_metadata')){
 	function the_photo_photoset_metadata( $id ){		
-		$photographer = $assistant = $makeup = $assistant = $location = $custom = $out = '';
-		
-		$photographer = get_post_meta($id, 'the_photo_photographer');
-		$assistant = get_post_meta($id, 'the_photo_assistant');
-		$makeup = get_post_meta($id, 'the_photo_makeup');
-		$location = get_post_meta($id, 'the_photo_location');
-		$custom = get_post_meta($id, 'the_photo_add_team');
-	
-		if(!empty($photographer) || !empty($assistant) || !empty($makeup) || !empty($location) || !empty($custom[0])) {
-			$out .= '<div class="photo-team col-md-offset-8 col-md-4 col-sm-6 col-xs-12">';
-				$out .= '<div>';
-				if(!empty($photographer)) {
-					$out .= '<p><span class="role">'. __('Photographer').': </span>';
-					$out .= '<span class="name">'.$photographer[0].'</span></p>';
-				}
-				if(!empty($assistant)) {
-					$out .= '<p><span class="role">'. __('Assistant').': </span>';
-					$out .= '<span class="name">'.$assistant[0].'</span></p>';
-				}
-				if(!empty($makeup)) {
-					$out .= '<p><span class="role">'. __('Makeup').': </span>';
-					$out .= '<span class="name">'.$makeup[0].'</span></p>';
-				}
-				if(!empty($location)) {
-					$out .= '<p><span class="role">'. __('Location').': </span>';
-					$out .= '<span class="name">'.$location[0].'</span></p>';
-				}
-				if(!empty($custom)) {
-					foreach($custom[0] as $assist) {
-						$out .= '<p><span class="role">'.$assist['role'].': </span>';
-						$out .= '<span class="name">'.$assist['member'].'</span></p>';
-					}
-				}
-				$out .= '</div>';
-			$out .= '</div>';
-			return $out;
-		} 
+		include( get_stylesheet_directory() . '/templates/photoset-metadata.php' );
+	}
+}
+
+if(!function_exists('the_photo_post_types_main_query')){
+	function the_photo_post_types_main_query( $query ) {
+		if ( is_home() && $query->is_main_query() )
+		    $query->set( 'post_type', array( 'post', 'photosessions', 'albums' ) );
+		return $query;
 	}
 }
 
 if(!function_exists('the_photo_before_single_post')){
 	function the_photo_before_single_post(){	
-		$sidebar = get_option('the_photo_post_sidebar', 'no_sidebar');
-		if($sidebar == 'right'){
-			echo '<div class="col-md-8">';
-		} elseif($sidebar == 'left'){
-			echo '<div class="col-md-8 pull-right">';
-		} else {
-			echo '<div class="col-md-12">';
-		}
+
+		get_template_part( '/templates/post', 'start' );
+
 	}
 }
 
 
 if(!function_exists('the_photo_post_sidebar')){
 	function the_photo_post_sidebar(){	
-		$sidebar = get_option('the_photo_post_sidebar', 'no_sidebar');
-		if($sidebar == 'right' || $sidebar == 'left'){
-			echo '</div>';
-			echo '<div class="col-md-4">';
-			the_photo_sidebar('post');
-			echo '</div>';
-		} else {
-			echo '</div>';
-		}
+
+		get_template_part( '/templates/post', 'sidebar' );
+
 	}
 }
 
 if(!function_exists('the_photo_single_feat_img')){
-	function the_photo_single_feat_img( $id ){
+	function the_photo_single_feat_img( $id='' ){
+		if(!$id){
+			$id = get_the_ID();
+		}
+
 		$slider = get_post_meta( $id, 'the_photo_slider');
-		if ( the_photo_thumb_or_slider( $id ) ) : // Check if Thumbnail exists 
-			$items = get_post_meta(get_the_ID(), 'the_photo_slider_items');
-			if ( !empty($slider)) { 
-				wp_localize_script( 'the_photo_scripts', 'thePhoto', 	array( 	'slider_items' 	=> $items[0],
-																			)
-				);  
-				$_out = '';
-				$_out .= '<div class="slider-wrapper">';
-					$_out .= the_photo_photoset_metadata( $id );
-					$_out .= '<div class="post-slider">';
-						foreach($slider[0] as $slide){
-							$_out .= '<div class="header-slide" style="background-image: url(' .$slide. ');"></div>';
-						}
-					$_out .= '</div>';
-				$_out .= '</div>';
-				echo $_out;
-			} else {
-				$_out = '';
-				$_out .= '<div class="slider-wrapper">';
-					$_out .= the_photo_photoset_metadata( $id );
-					$_out .= '<div class="featured-image">';
-						$_out .= '<div class="header-img" style="background-image: url(' .get_the_post_thumbnail_url(). ');"></div>';
-					$_out .= '</div>';
-				$_out .= '</div>';
-				echo $_out;
-			} 
-			
+		include( get_stylesheet_directory() . '/templates/slider.php' );		
 		
-		endif;
 	}
 }
 
 if(!function_exists('the_photo_get_footer')){
 	function the_photo_get_footer(){
-		$columns = get_option('the_photo_footer_sidebar', '2');	
-		$out = '';
-		ob_start();
-		switch ($columns) {
-			case 1:
-				?>
-				<div class="col-md-12">
-					 <?php the_photo_sidebar( 'footer1' ); ?>
-				</div>
-				<?php
-				break;
-			case 2:
-				?>
-				<div class="col-md-6">
-					<?php the_photo_sidebar( 'footer1' ); ?>
-				</div>
-				<div class="col-md-6">
-					<?php the_photo_sidebar( 'footer2' ); ?>
-				</div>
-				<?php
-				break;
-			case 3:
-				?>
-				<div class="col-md-4">
-					<?php the_photo_sidebar( 'footer1' ); ?>
-				</div>
-				<div class="col-md-8">
-					<?php the_photo_sidebar( 'footer2' ); ?>
-				</div>
-				<?php 
-				break;
-			case 4:
-				?>
-				<div class="col-md-8">
-					<?php the_photo_sidebar( 'footer1' ); ?>
-				</div>
-				<div class="col-md-4">
-					<?php the_photo_sidebar( 'footer2' ); ?>
-				</div>
-				<?php 
-				break;
-			case 5:
-				?>
-				<div class="col-md-4">
-					<?php the_photo_sidebar( 'footer1' ); ?>
-				</div>
-				<div class="col-md-4">
-					<?php the_photo_sidebar( 'footer2' ); ?>
-				</div>
-				<div class="col-md-4">
-					<?php the_photo_sidebar( 'footer3' ); ?>
-				</div>
-				<?php 
-				break;				
-			case 6:
-				?>
-				<div class="col-md-3">
-					<?php the_photo_sidebar( 'footer1' ); ?>
-				</div>
-				<div class="col-md-3">
-					<?php the_photo_sidebar( 'footer2' ); ?>
-				</div>
-				<div class="col-md-3">
-					<?php the_photo_sidebar( 'footer3' ); ?>
-				</div>
-				<div class="col-md-3">
-					<?php the_photo_sidebar( 'footer4' ); ?>
-				</div>	
-				<?php 
-				break;
-		}
-		ob_end_flush();
+
+		get_template_part( '/templates/footer' );
+
 	}
 }
 
@@ -556,7 +383,7 @@ if(!function_exists('the_photo_read_image_metadata')){
 			'ISOSpeedRatings',
 			'FNumber',
 		);
-		$meta = exif_read_data($file);
+		@$meta = exif_read_data($file);
 		foreach($meta as $field => $value){
 			if(in_array($field, $exif)){
 				$divider = explode('/',$value);
@@ -585,6 +412,38 @@ if(!function_exists('the_photo_read_image_metadata')){
 	}
 }
 
+if(!function_exists('the_photo_get_post_tags')){
+	function the_photo_get_post_tags(){
+
+		get_template_part( '/templates/post-tags' );
+
+	}
+}
+
+if(!function_exists('the_photo_get_post_categories')){
+	function the_photo_get_post_categories(){
+
+		get_template_part( '/templates/post-categories' );
+
+	}
+}
+
+if(!function_exists('the_photo_get_post_author')){
+	function the_photo_get_post_author(){
+
+		get_template_part( '/templates/post-author' );
+
+	}
+}
+
+if(!function_exists('the_photo_get_post_date')){
+	function the_photo_get_post_date(){
+
+		get_template_part( '/templates/post-date' );
+
+	}
+}
+
 function the_photo_attachment_field_credit( $form_fields, $post ) {
 	$form_fields['be-photographer-name'] = array(
 		'label' => 'Photographer Name',
@@ -610,7 +469,7 @@ function the_photo_attachment_field_credit_save( $post, $attachment ) {
 		update_post_meta( $post['ID'], 'be_photographer_name', $attachment['be-photographer-name'] );
 
 	if( isset( $attachment['be-photographer-url'] ) )
-update_post_meta( $post['ID'], 'be_photographer_url', esc_url( $attachment['be-photographer-url'] ) );
+		update_post_meta( $post['ID'], 'be_photographer_url', esc_url( $attachment['be-photographer-url'] ) );
 
 	return $post;
 }

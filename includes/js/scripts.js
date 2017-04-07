@@ -1,5 +1,7 @@
 (function ($, root, undefined) {
 	
+	var	menu_crop = themeOptions.menu_width;
+
 	/*Slider Proportions Function*/
 	var slider_prop = function(){
 		var width = $(window).width(),
@@ -15,11 +17,38 @@
 	
 	/*Menu Width Function*/
 	var menu_width = function(){
-		if ($('.header-menu').length > 0) {
+		if ( $('.header-menu').length > 0 && menu_crop == 'true' ) {
 			var logoWidth = $('#masthead .site-branding').width();
 			var containerWidth = $('.header-menu').parent().width();
 			var menuWidth = containerWidth - logoWidth;
 			$('.header-menu').css('width', menuWidth);
+		}
+	}
+
+	/*Single post slider*/
+	var post_slider = function(){
+		if($(".post-slider").length > 0) {
+			var slider_items = sliderOptions.slider_items;
+			$(".post-slider").owlCarousel({
+				autoplay:true,
+    			autoplayTimeout:2000,
+				slideSpeed: 400,
+				items: slider_items,
+				dots: true,
+				loop: true,
+				nav: false,
+			    responsiveClass:true,
+			    responsive:{
+			        0:{
+			            items:1,
+			            nav:false
+			        },
+			        600:{
+			            items:slider_items,
+			            nav:false
+			        },
+			    }
+			});
 		}
 	}
 	
@@ -62,24 +91,6 @@
 	        });
 	    }
 		
-		/*Single post slider*/
-		if($(".post-slider").length > 0) {
-			var slider_items = thePhoto.slider_items;
-			$(".post-slider").owlCarousel({
-				autoPlay: true,
-				slideSpeed: 200,
-				items: slider_items,
-				dots: false,
-				loop: true,
-				nav: false,
-				responsive:{
-				0:{
-					items: slider_items,
-				},
-				}
-			});
-		}
-		
 		/*Sidebar submenu open*/
 		if($("#sidebar .sidebar-menu").length > 0) {
 			$('#sidebar .sidebar-menu .page_item_has_children').click(function(e) {
@@ -101,6 +112,7 @@
 		slider_prop();
 		/*Menu Width*/
 		menu_width();
+		post_slider();
 		
 	});
 	
@@ -119,6 +131,7 @@
 	$(window).resize(function () {
 		slider_prop();
 		menu_width();
+		post_slider();
 	});
 	
 })(jQuery, this);

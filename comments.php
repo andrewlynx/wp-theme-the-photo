@@ -9,9 +9,13 @@
 
 	<h2><?php comments_number(); ?></h2>
 
+	<?php paginate_comments_links(); ?>
+
 	<ul>
 		<?php wp_list_comments('type=comment&callback=the_photo_comments'); // Custom callback in functions.php ?>
 	</ul>
+
+	<?php paginate_comments_links(); ?>
 
 <?php elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 

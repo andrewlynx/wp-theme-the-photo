@@ -12,6 +12,7 @@ add_action('wp_enqueue_scripts', 'the_photo_styles'); // Add Theme Stylesheet
 add_action('init', 'the_photo_register_menu'); // Add The Photo Menu
 add_action('widgets_init', 'the_photo_widgets_init'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'the_photo_pagination'); // Add our HTML5 Pagination
+add_action('pre_get_posts', 'the_photo_post_types_main_query' );
 
 // Remove Actions
 remove_action('wp_head', 'feed_links_extra', 3); // Display the links to the extra feeds such as category feeds
@@ -28,7 +29,6 @@ remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 // Add Filters
-add_filter('avatar_defaults', 'the_photogravatar'); // Custom Gravatar in Settings > Discussion
 add_filter('body_class', 'the_photo_slug_to_body_class'); // Add slug to body class (Starkers build)
 add_filter('widget_text', 'shortcode_unautop'); // Remove <p> tags in Dynamic Sidebars (better!)
 //add_filter('wp_nav_menu_args', 'my_wp_nav_menu_args'); // Remove surrounding <div> from WP Navigation
@@ -39,9 +39,7 @@ add_filter('the_excerpt', 'shortcode_unautop'); // Remove auto <p> tags in Excer
 add_filter('the_excerpt', 'do_shortcode'); // Allows Shortcodes to be executed in Excerpt (Manual Excerpts only)
 add_filter('excerpt_more', 'html5_blank_view_article'); // Add 'View Article' button instead of [...] for Excerpts
 add_filter('body_class', 'the_photo_body_classes' ); // Add custom body classes
-add_filter('post_class', 'the_photo_post_classes' ); // Add custom post classes
-add_filter( 'attachment_fields_to_edit', 'the_photo_attachment_field_credit', 10, 2 ); //Add image fields
-add_filter( 'attachment_fields_to_save', 'the_photo_attachment_field_credit_save', 10, 2 ); //Save image fields
+add_filter('post_class', 'the_photo_post_classes' ); // Add custom post classes 
 if( get_option('the_photo_adminbar') == 1 ){
 	add_filter('show_admin_bar', 'remove_admin_bar'); // Remove Admin bar
 }
@@ -51,3 +49,12 @@ add_filter('image_send_to_editor', 'remove_thumbnail_dimensions', 10); // Remove
 
 // Remove Filters
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
+
+//Single Photosession
+add_action('the_photo_photosession_before_page', 'the_photo_single_feat_img', 10);
+
+add_action('the_photo_photosession_before_content', 'the_photo_get_post_date', 10);
+add_action('the_photo_photosession_before_content', 'the_photo_get_post_author', 20);
+
+add_action('the_photo_photosession_after_content', 'the_photo_get_post_tags', 10);
+add_action('the_photo_photosession_after_content', 'the_photo_get_post_categories', 20);

@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+<div id="content" class="site-content container">
+
 	<main role="main">
 		<!-- section -->
 		<section>
@@ -8,9 +10,9 @@
 
 			<h1><?php _e( 'Author Archives for ', 'the_photo' ); echo get_the_author(); ?></h1>
 
-		<?php if ( get_the_author_meta('description')) : ?>
-
 		<?php echo get_avatar(get_the_author_meta('user_email')); ?>
+
+		<?php if ( get_the_author_meta('description')) : ?>
 
 			<h2><?php _e( 'About ', 'the_photo' ); echo get_the_author() ; ?></h2>
 
@@ -71,6 +73,8 @@
 		</section>
 		<!-- /section -->
 	</main>
+
+</div>
 
 <?php get_sidebar(); ?>
 

@@ -58,6 +58,57 @@ if(!function_exists('the_photo_set_inline_styles')) {
 		
 		$sidebar_font_color = get_option('the_photo_sidebar_font_color', '#f1a400');
 		if(!empty($sidebar_font_color)) {$styles .= '#sidebar, #sidebar a, #sidebar h1, #sidebar h2, #sidebar h3, #sidebar h4, #sidebar h5, #sidebar h6 { color: '.$sidebar_font_color .'; }';}
+
+		$the_photo_transparent_header_background = get_option('the_photo_transparent_header_background' );
+		$the_photo_gradient_header_background = get_option('the_photo_gradient_header_background' );
+		if( !empty( $the_photo_transparent_header_background ) ) {$styles .= '.site-header { background-color: transparent; position: absolute; }';}
+		elseif( !empty( $the_photo_gradient_header_background ) ){
+			$color_1 = get_option('the_photo_gradient_header_color_1', '#080808' );
+			$color_2 = get_option('the_photo_gradient_header_color_2', '#080808' );
+			$direction = get_option('the_photo_gradient_direction', 'l_r' );
+			switch ($direction) {
+				case 'rad':
+					$dir = 'ellipse at center';
+					$wdir = 'center, ellipse cover';
+					$type = 'radial';
+					break;
+
+				case 'bl_r':
+					$dir = '45deg';
+					$wdir = '45deg';
+					$type = 'linear';
+					break;
+
+				case 'br_l':
+					$dir = '135deg';
+					$wdir = '-45deg';
+					$type = 'linear';
+					break;
+
+				case 'b_t':
+					$dir = 'to bottom';
+					$wdir = 'top';
+					$type = 'linear';
+					break;
+				
+				default:
+					$dir = 'to right';
+					$wdir = 'left';
+					$type = 'linear';
+					break;
+			}
+			$styles .= '.site-header { 
+				background: '. $color_1 .';
+		    	background: -webkit-'.$type.'-gradient('.$wdir.', '. $color_1 .', '. $color_2 .');
+		    	background: -moz-'.$type.'-gradient('.$wdir.', '. $color_1 .', '. $color_2 .');
+		    	background: '.$type.'-gradient('.$dir.', '. $color_1 .', '. $color_2 .');
+			}';
+			
+		}
+		else {
+			$the_photo_header_background = get_option('the_photo_header_background', '#080808' );
+			if(!empty($the_photo_header_background)) {$styles .= '.site-header { background-color: '. $the_photo_header_background .'; }';}
+		}
 		
 		$header_logo_position = get_option('the_photo_header_logo_position', 'center');
 		if($header_logo_position == 'center'){ $header_logo_position = 'none';}

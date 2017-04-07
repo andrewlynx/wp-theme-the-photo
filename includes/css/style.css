@@ -7,17 +7,131 @@ body {
   font-family: 'Open Sans Light', sans-serif;
 }
 
-/* line 4, sass/_common.scss */
+/* line 5, sass/_common.scss */
+.alignnone {
+  margin: 5px 20px 20px 0;
+}
+
+/* line 9, sass/_common.scss */
+.aligncenter,
+div.aligncenter {
+  display: block;
+  margin: 5px auto 5px auto;
+}
+
+/* line 15, sass/_common.scss */
+.alignright {
+  float: right;
+  margin: 5px 0 20px 20px;
+}
+
+/* line 20, sass/_common.scss */
+.alignleft {
+  float: left;
+  margin: 5px 20px 20px 0;
+}
+
+/* line 25, sass/_common.scss */
 a {
   -moz-transition: ease-in-out 0.5s;
   -o-transition: ease-in-out 0.5s;
   -webkit-transition: ease-in-out 0.5s;
   transition: ease-in-out 0.5s;
 }
+/* line 28, sass/_common.scss */
+a img.alignright {
+  float: right;
+  margin: 5px 0 20px 20px;
+}
+/* line 33, sass/_common.scss */
+a img.alignnone {
+  margin: 5px 20px 20px 0;
+}
+/* line 37, sass/_common.scss */
+a img.alignleft {
+  float: left;
+  margin: 5px 20px 20px 0;
+}
+/* line 42, sass/_common.scss */
+a img.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-/* line 7, sass/_common.scss */
+/* line 48, sass/_common.scss */
 img {
   max-width: 100%;
+}
+
+/* line 52, sass/_common.scss */
+.wp-caption {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  max-width: 96%;
+  /* Image does not overflow the content area */
+  padding: 5px 3px 10px;
+  text-align: center;
+}
+/* line 59, sass/_common.scss */
+.wp-caption.alignnone {
+  margin: 5px 20px 20px 0;
+}
+/* line 62, sass/_common.scss */
+.wp-caption.alignleft {
+  margin: 5px 20px 20px 0;
+}
+/* line 65, sass/_common.scss */
+.wp-caption.alignright {
+  margin: 5px 0 20px 20px;
+}
+/* line 68, sass/_common.scss */
+.wp-caption img {
+  border: 0 none;
+  height: auto;
+  margin: 0;
+  max-width: 98.5%;
+  padding: 0;
+  width: auto;
+}
+/* line 76, sass/_common.scss */
+.wp-caption p.wp-caption-text {
+  font-size: 11px;
+  line-height: 17px;
+  margin: 0;
+  padding: 0 4px 5px;
+}
+
+/* Text meant only for screen readers. */
+/* line 85, sass/_common.scss */
+.screen-reader-text {
+  clip: rect(1px, 1px, 1px, 1px);
+  position: absolute !important;
+  white-space: nowrap;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+/* line 92, sass/_common.scss */
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+  /* Above WP toolbar. */
 }
 
 /* line 1, sass/_container.scss */
@@ -275,8 +389,9 @@ img {
   float: left;
   padding-left: 10px;
   position: relative;
+  display: inline-block;
 }
-/* line 218, sass/_header.scss */
+/* line 219, sass/_header.scss */
 .site-header .header-menu li a {
   display: inline-block;
   color: #fff;
@@ -284,17 +399,17 @@ img {
   padding: 13px 8px;
   border: 2px solid transparent;
 }
-/* line 224, sass/_header.scss */
+/* line 225, sass/_header.scss */
 .site-header .header-menu li a:hover {
   border: 2px solid #ffba00;
   color: #ffba00;
   text-decoration: none;
 }
-/* line 229, sass/_header.scss */
+/* line 230, sass/_header.scss */
 .site-header .header-menu li a:focus {
   text-decoration: none;
 }
-/* line 233, sass/_header.scss */
+/* line 234, sass/_header.scss */
 .site-header .header-menu li > .children {
   display: none;
   position: absolute;
@@ -302,12 +417,12 @@ img {
   padding: 0;
   z-index: 1;
 }
-/* line 239, sass/_header.scss */
+/* line 240, sass/_header.scss */
 .site-header .header-menu li > .children li {
   padding: 0;
   overflow: visible;
 }
-/* line 242, sass/_header.scss */
+/* line 243, sass/_header.scss */
 .site-header .header-menu li > .children li a {
   border-radius: 5px;
   border: none;
@@ -316,11 +431,11 @@ img {
   position: relative;
   min-width: 260px;
 }
-/* line 251, sass/_header.scss */
+/* line 252, sass/_header.scss */
 .site-header .header-menu li > .children li:first-child a {
   border: none;
 }
-/* line 256, sass/_header.scss */
+/* line 257, sass/_header.scss */
 .site-header .header-menu li > .children li.page_item_has_children > a {
   width: 100%;
   transition-delay: 0.2s;
@@ -329,15 +444,15 @@ img {
   -webkit-transition: width 0.3s;
   transition: width 0.3s;
 }
-/* line 264, sass/_header.scss */
+/* line 265, sass/_header.scss */
 .site-header .header-menu li > .children li.page_item_has_children:hover {
   width: 120%;
 }
-/* line 266, sass/_header.scss */
+/* line 267, sass/_header.scss */
 .site-header .header-menu li > .children li.page_item_has_children:hover .children {
   opacity: 1;
 }
-/* line 270, sass/_header.scss */
+/* line 271, sass/_header.scss */
 .site-header .header-menu li > .children li.page_item_has_children .children {
   top: 0;
   left: 100%;
@@ -348,18 +463,18 @@ img {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
 }
-/* line 284, sass/_header.scss */
+/* line 285, sass/_header.scss */
 .site-header .header-menu li.page_item_has_children > a {
   padding-right: 30px;
 }
-/* line 286, sass/_header.scss */
+/* line 287, sass/_header.scss */
 .site-header .header-menu li.page_item_has_children > a:after {
   content: '\f107';
   font-family: FontAwesome;
   padding-left: 10px;
   position: absolute;
 }
-/* line 295, sass/_header.scss */
+/* line 296, sass/_header.scss */
 .site-header .header-menu li:hover > .children {
   display: block;
 }
